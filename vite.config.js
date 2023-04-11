@@ -10,7 +10,6 @@ export default defineConfig({
         vue(),
         laravel({
             input: ['resources/js/app.js',
-                'resources/css/app.scss',
                 'resources/css/bootstrap-extended.css',
                 'resources/css/components.css',
                 'resources/css/login-register.css',
