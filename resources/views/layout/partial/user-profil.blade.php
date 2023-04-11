@@ -9,22 +9,13 @@
             </a>
             <div class="text-light">UX Designer</div>
             <div class="dropdown-menu arrow" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item">
+                <a class="dropdown-item" href="{{route('profile.edit')}}">
                     <i class="material-icons align-middle mr-1">person</i>
                     <span class="align-middle">Profile</span>
                 </a>
-                <a class="dropdown-item">
-                    <i class="material-icons align-middle mr-1">message</i>
-                    <span class="align-middle">Messages</span>
-                </a>
-                <a class="dropdown-item">
-                    <i class="material-icons align-middle mr-1">attach_money</i>
-                    <span class="align-middle">Balance</span>
-                </a>
-                <a class="dropdown-item">
-                    <i class="material-icons align-middle mr-1">settings</i>
-                    <span class="align-middle">Settings</span></a>
-                <a class="dropdown-item">
+
+                <a class="dropdown-item" href="{{route('logout')}}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="material-icons align-middle mr-1">power_settings_new</i>
                     <span class="align-middle">Log Out</span>
                 </a>

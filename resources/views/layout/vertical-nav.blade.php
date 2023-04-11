@@ -8,24 +8,31 @@
                     <span class="menu-title" data-i18n="Dashboard">Dashboard</span>
                 </a>
             </li>
-
-            <li class=" navigation-header">
-                <span>Support</span>
-                <i class="material-icons nav-menu-icon" data-toggle="tooltip" data-placement="right"
-                   data-original-title="Support">more_horiz</i>
-            </li>
             <li class=" nav-item">
-                <a href="https://pixinvent.ticksy.com/" target="_blank">
-                    <i class="material-icons">local_offer</i>
-                    <span class="menu-title" data-i18n="Raise Support">Raise Support</span>
+                <a href="#">
+                    <i class="material-icons">token</i>
+                    <span class="menu-title" data-i18n="Crypto">Gestion de vos données</span>
                 </a>
-            </li>
-            <li class=" nav-item">
-                <a href="https://pixinvent.com/modern-admin-clean-bootstrap-4-dashboard-html-template/documentation"
-                   target="_blank">
-                    <i class="material-icons">format_size</i>
-                    <span class="menu-title" data-i18n="Documentation">Documentation</span>
-                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{route('crypto.entries.create')}}">
+                            <i class="material-icons"></i>
+                            <span data-i18n="1 column">Créer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{route('crypto.entries.index')}}">
+                            <i class="material-icons"></i>
+                            <span data-i18n="1 column">Liste non validés</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{route('crypto.entries.valide.index')}}">
+                            <i class="material-icons"></i>
+                            <span data-i18n="1 column">Liste validés</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

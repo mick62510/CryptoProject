@@ -1,0 +1,55 @@
+$primary: #673ab7;
+
+.form-group label {
+    padding: 0;
+    margin-left: 0 !important;
+}
+
+table {
+    tbody {
+        tr {
+            &.extend-row-show {
+                border-top: hidden !important;
+            }
+
+            td {
+                &.extend-row {
+                    &:hover {
+                        i {
+                            color: $primary;
+                        }
+                    }
+                }
+            }
+
+            &.extend-row-show {
+                td {
+                    .container {
+                        max-width: 80%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pswp__container {
+    .pswp__img {
+        height: auto !important;
+    }
+}
+
+
+.pagination {
+    .page-item {
+        .page-link {
+            background: white;
+            color: $primary;
+
+            &:hover {
+                background: $primary;
+                color: white;
+            }
+        }
+    }
+}

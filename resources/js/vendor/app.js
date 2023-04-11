@@ -19,7 +19,6 @@ import 'bootstrap';
 
 
   $(window).on('load', function () {
-    console.log("ezaezaeaz");
     var rtl;
     var compactMenu = true; // Set it to true, if you want default menu to be compact
 
@@ -448,7 +447,8 @@ import 'bootstrap';
   $(document).on('click', '.menu-toggle, .modern-nav-toggle', function (e) {
     e.preventDefault();
 
-    // Hide dropdown of user profile section for material templates
+
+      // Hide dropdown of user profile section for material templates
     if ($('.user-profile .user-info .dropdown').hasClass('show')) {
       $('.user-profile .user-info .dropdown').removeClass('show');
       $('.user-profile .user-info .dropdown .dropdown-menu').removeClass('show');

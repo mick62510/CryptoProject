@@ -1,18 +1,7 @@
 <!DOCTYPE html>
-<!--
-Template Name: Modern Admin - Clean Bootstrap 4 Dashboard HTML Template
-Author: PixInvent
-Website: http://www.pixinvent.com/
-Contact: hello@pixinvent.com
-Follow: www.twitter.com/pixinvents
-Like: www.facebook.com/pixinvents
-Purchase: https://1.envato.market/modern_admin
-Renew Support: https://1.envato.market/modern_admin
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
 
--->
 <html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
+
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,6 +22,7 @@ License: You must have a valid license purchased only from themeforest(the above
     @vite(['resources/css/vendor/material-vendors.min.css',
 'resources/css/vendor/material.css','resources/css/vendor/components.css','resources/css/vendor/bootstrap-extended.css',
 'resources/css/vendor/material-extended.css','resources/css/vendor/material-colors.css','resources/css/vendor/material-vertical-menu-modern.css',
+'resources/css/app.scss',
 ])
     @stack('css')
 
@@ -89,7 +79,13 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="content-body">
-            @yield('content')
+            <div id="app">
+                @include('layout.alert')
+                @yield('content')
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -100,11 +96,16 @@ License: You must have a valid license purchased only from themeforest(the above
 
 @include('layout.footer')
 
-
 @vite('resources/js/vendor/unison.js')
 @vite(['resources/js/vendor/app-menu.js','resources/js/vendor/material-app.js'])
 @vite('resources/js/vendor/app.js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+
+@vite('resources/js/vendor/vendors.min.js')
 @stack('js')
+
 </body>
 
 </html>
