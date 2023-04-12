@@ -20,7 +20,7 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-   
+
     @vite(['resources/css/app.scss',])
     @stack('css')
 </head>
