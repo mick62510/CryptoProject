@@ -9,8 +9,21 @@ export default defineConfig({
     plugins: [
         vue(),
         laravel({
-            input: ['resources/js/app.js',
-                'resources/css/app.scss',],
+            input: [
+                'resources/js/app.js',
+                'resources/css/app.scss',
+                'resources/js/vendor/app.js',
+                'resources/js/vendor/app-menu.js',
+                'resources/js/vendor/material-app.js',
+                'resources/js/vendor/unison.js',
+                'resources/js/vendor/vendors.min.js',
+                'resources/js/bootstrap.js',
+                'resources/js/form-file.js',
+                'resources/js/grid.js',
+                'resources/js/image.js',
+                'resources/js/new-grid.js',
+
+            ],
             refresh: true,
 
         }),
