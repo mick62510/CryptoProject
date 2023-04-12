@@ -1,7 +1,5 @@
 @extends('layout')
-@push('css')
-    @vite('resources/css/vendor/photoswipe-skin.css')
-@endpush
+
 
 @section('content')
     <section class="row">
