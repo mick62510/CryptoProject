@@ -19,13 +19,8 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-    @vite(['resources/css/vendor/material-vendors.min.css',
-'resources/css/vendor/material.css','resources/css/vendor/components.css','resources/css/vendor/bootstrap-extended.css',
-'resources/css/vendor/material-extended.css','resources/css/vendor/material-colors.css','resources/css/vendor/material-vertical-menu-modern.css',
-'resources/css/app.scss',
-])
+    @vite(['resources/css/app.scss',])
     @stack('css')
-
 </head>
 <!-- END: Head-->
 
