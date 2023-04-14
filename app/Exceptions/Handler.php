@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Models\Erreur;
+use App\Models\Error;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            dd("eza");
+
             try {
                 $this->saveError($e);
             } catch (\Exception $e) {
@@ -57,9 +57,21 @@ class Handler extends ExceptionHandler
         });
     }
 
+    public function report(Throwable $e)
+    {
+        try {
+            $this->saveError($e);
+        } catch (\Exception $e) {
+
+        }
+        parent::report($e);
+    }
+
     private function saveError(Throwable $e): void
     {
-        $erreur = new Erreur;
+        $erreur = new Error();
+
+        $erreur->user_id = Auth::id();
         $erreur->exception = get_class($e);
         $erreur->message = $e->getMessage();
         $erreur->code = (string)$e->getCode();
@@ -73,8 +85,6 @@ class Handler extends ExceptionHandler
         $erreur->uri = LaravelRequest::fullUrl();
         $erreur->request = LaravelRequest::all() ? json_encode(LaravelRequest::all()) : null;
         $erreur->method = LaravelRequest::method();
-        $erreur->user_id = Auth::id();
-
         if ($e instanceof ErrorException) {
             $erreur->severity = $e->getSeverity();
         }
@@ -87,5 +97,6 @@ class Handler extends ExceptionHandler
         }
 
         $erreur->save();
+        dd("ezaeazeazeazeaze");
     }
 }

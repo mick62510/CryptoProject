@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Erreur extends Model
+class Error extends Model
 {
     use HasFactory;
 
-    protected $table = 'crypto_entries_zone';
+    protected $primaryKey = 'id';
+    protected $table = 'error';
 
     protected $fillable = ['exception', 'message', 'code', 'file',
         'line', 'severity', 'trace', 'user_agent',

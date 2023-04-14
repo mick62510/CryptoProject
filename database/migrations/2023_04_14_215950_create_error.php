@@ -12,24 +12,24 @@ return new class extends Migration {
     {
         Schema::create('error', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('exception', 255);
-            $table->text('message');
-            $table->unsignedSmallInteger('code');
-            $table->string('file', 255);
-            $table->unsignedMediumInteger('line');
+            $table->string('exception', 255)->nullable();
+            $table->text('message')->nullable();
+            $table->unsignedSmallInteger('code')->nullable();
+            $table->string('file', 255)->nullable();
+            $table->unsignedMediumInteger('line')->nullable();
             $table->string('severity', 255)->nullable();
-            $table->mediumText('trace');
-            $table->string('user_agent', 255);
+            $table->mediumText('trace')->nullable();
+            $table->string('user_agent', 255)->nullable();
             $table->string('referer', 255)->nullable();
-            $table->string('ip', 50);
-            $table->string('port', 50);
+            $table->string('ip', 50)->nullable();
+            $table->string('port', 50)->nullable();
             $table->string('uri', 500)->nullable();
             $table->mediumText('request')->nullable();
             $table->string('method', 50)->nullable();
             $table->string('route', 255)->nullable();
             $table->string('route_action', 255)->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->boolean('checked');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->boolean('checked')->default(0);
             $table->timestamps();
         });
     }
