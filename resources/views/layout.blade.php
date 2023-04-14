@@ -93,7 +93,7 @@
 
 @include('layout.footer')
 
-
+@vite('resources/js/app.js')
 @vite('resources/js/vendor/unison.js')
 @vite(['resources/js/vendor/app-menu.js','resources/js/vendor/material-app.js'])
 @vite('resources/js/vendor/app.js')
