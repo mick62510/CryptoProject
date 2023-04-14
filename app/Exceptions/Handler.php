@@ -97,6 +97,5 @@ class Handler extends ExceptionHandler
         }
 
         $erreur->save();
-        dd("ezaeazeazeazeaze");
     }
 }
