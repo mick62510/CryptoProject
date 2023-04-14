@@ -102,7 +102,7 @@
         integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
         crossorigin="anonymous"></script>
 
-@vite('resources/js/vendor/vendors.min.js')
+ 
 @stack('js')
 
 </body>
