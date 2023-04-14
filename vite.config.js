@@ -16,7 +16,6 @@ export default defineConfig({
                 'resources/js/vendor/app-menu.js',
                 'resources/js/vendor/material-app.js',
                 'resources/js/vendor/unison.js',
-                'resources/js/vendor/vendors.min.js',
                 'resources/js/bootstrap.js',
                 'resources/js/form-file.js',
                 'resources/js/grid.js',
