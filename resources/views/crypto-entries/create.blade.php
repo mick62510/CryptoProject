@@ -1,5 +1,13 @@
 @extends('layout')
-
+@section('breadcrumb')
+    <li class="breadcrumb-item">
+        <a href="{{route('home')}}">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Gestion de vos données
+    </li>
+    <li class="breadcrumb-item active">Formulaire
+    </li>
+@endsection
 @section('content')
     <section class="row">
         <div class="col-12">
