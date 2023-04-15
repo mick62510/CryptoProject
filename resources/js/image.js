@@ -1,4 +1,4 @@
-import $ from 'jquery';
+
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
 

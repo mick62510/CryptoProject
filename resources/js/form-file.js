@@ -1,4 +1,4 @@
-import $ from "jquery";
+
 import "block-ui"
 
 $(document).ready(function () {
