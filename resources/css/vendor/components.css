@@ -3598,7 +3598,7 @@ footer .ft-heart:before {
     right: 30px;
     display: none;
     cursor: pointer;
-    background: url("../../app-assets/images/slider/top.png") no-repeat;
+    background: url("../../images/top.png") no-repeat;
 }
 
 .ps-container {
@@ -4733,9 +4733,7 @@ body:after {
 }
 
 #codemirror-tabs + .CodeMirror .cm-tab {
-    background: url(../../app-assets/images/icons/img.png);
-    background-position: right;
-    background-repeat: no-repeat;
+    background: url(../../images/img.png) no-repeat right;
 }
 
 iframe#preview {
@@ -5511,14 +5509,6 @@ a.dt-button.green {
     box-sizing: border-box;
 }
 
-td.details-control {
-    background: url("../images/datatables/resources/details_open.png") no-repeat center center;
-    cursor: pointer;
-}
-
-tr.shown td.details-control {
-    background: url("../images/datatables/resources/details_close.png") no-repeat center center;
-}
 
 .DTFC_LeftBodyLiner, .DTFC_RightBodyLiner {
     background: white;
