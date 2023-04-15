@@ -6,8 +6,11 @@
                    href="#" data-toggle="dropdown">
                     <span class="avatar avatar-online">
                         <img
-                            src="{{Vite::asset('resources/images/avatar-s-19.png')}}"
-                            alt="avatar"><i></i></span><span class="user-name">John Doe</span></a>
+                            src="{{Vite::asset('resources/images/avatar-s-19.png')}}" alt="avatar">
+                        <i></i>
+                    </span>
+                    <span class="user-name">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
+                </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="{{route('profile.edit')}}">
                         <i class="material-icons">person_outline</i> Edit Profil

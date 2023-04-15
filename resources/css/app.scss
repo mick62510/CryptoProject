@@ -9,6 +9,15 @@
 
 $primary: #673ab7;
 
+
+.main-menu {
+    .user-profile {
+        a.dropdown-toggle {
+            color: white;
+        }
+    }
+}
+
 .form-group label {
     padding: 0;
     margin-left: 0 !important;

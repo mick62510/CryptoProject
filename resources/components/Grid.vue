@@ -4,7 +4,7 @@
     <section class="row mt-75">
         <div class="col-12 overflow-auto">
             <table class="table">
-                <thead class="bg-primary white">
+                <thead class="bg-primary text-white">
                 <tr>
                     <th v-if="configHaskey('extra')"></th>
                     <grid-thead-th :column="column" v-for="column in config.columns"/>

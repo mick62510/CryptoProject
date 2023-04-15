@@ -5,7 +5,7 @@
         <div class="name-wrapper d-block dropdown mt-1">
             <a class="white dropdown-toggle" id="user-account" href="#" data-toggle="dropdown" aria-haspopup="true"
                aria-expanded="false">
-                <span class="user-name">Charlie Adams</span>
+                <span class="user-name">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
             </a>
             <div class="text-light">UX Designer</div>
             <div class="dropdown-menu arrow" aria-labelledby="dropdownMenuLink">
