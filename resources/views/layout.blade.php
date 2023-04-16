@@ -45,10 +45,10 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mobile-menu d-lg-none mr-auto"><a
-                            class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
-                                class="ft-menu font-large-1"></i></a></li>
+                        class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
+                            class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="{{ url('home') }}">
+                    <a class="navbar-brand" href="{{ route('home') }}">
                         <img class="brand-logo" alt="modern admin logo"
                              src="{{Vite::asset('resources/images/logo.png')}}">
                         <h3 class="brand-text">Modern</h3>
