@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -8,11 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description"
-          content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
+          content="Trading Journal, intègre tous les tradings que tu as fait et possède des graphiques, des exports.">
     <meta name="keywords"
           content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
-    <meta name="author" content="PIXINVENT">
-    <title>2 Columns - Modern Admin - Clean Bootstrap 4 Dashboard HTML Template + Bitcoin Dashboard</title>
+    <meta name="author" content="TradingJournal">
+
+    <title>Trading-Journal</title>
     <link rel="apple-touch-icon" href="{{Vite::asset('resources/images/apple-icon-120.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{Vite::asset('resources/images/favicon.ico')}}">
     <link
@@ -23,16 +25,22 @@
 
     @vite(['resources/css/app.scss',])
     @stack('css')
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern material-vertical-layout material-layout vertical-collapsed-menu 2-columns   menu-collapsed fixed-navbar"
-      data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body
+    class="vertical-layout vertical-menu-modern material-vertical-layout material-layout vertical-collapsed-menu 2-columns   menu-collapsed fixed-navbar"
+    data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
 <!-- BEGIN: Header-->
-<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
+<nav
+    class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
     <div class="navbar-wrapper">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
@@ -112,7 +120,14 @@
 
 
 @stack('js')
-
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
+</script>
 </body>
 
 </html>
