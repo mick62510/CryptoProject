@@ -1,7 +1,7 @@
 {
     "name": "Trading-Journal",
     "short_name": "LPT",
-    "start_url": "/layout.blade.php",
+    "start_url": "https://traiding-journal.com/",
     "background_color": "#6777ef",
     "description": "Tutorial of Laravel Package",
     "display": "fullscreen",
