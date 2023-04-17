@@ -7,7 +7,7 @@
                aria-expanded="false">
                 <span class="user-name">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
             </a>
-            <div class="text-light">UX Designer</div>
+            <div class="text-light">{{\Illuminate\Support\Facades\Auth::user()->email}}</div>
             <div class="dropdown-menu arrow" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{{route('profile.edit')}}">
                     <i class="material-icons align-middle mr-1">person</i>
