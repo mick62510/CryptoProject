@@ -18,7 +18,7 @@
             </div>
         </td>
     </tr>
-    <grid-tbody-tr-extra v-if="hasExtra" :tr="this.tr.extraColumns" :id="this.tr.rowId"
+    <grid-tbody-tr-extra v-if="hasExtra" :tr="this.tr.extraColumns" :id="this.tr.rowId" :index="index"
                          v-show="this.show"></grid-tbody-tr-extra>
 </template>
 
@@ -29,7 +29,8 @@ export default {
     name: "GridTbodyTr",
     components: {GridTbodyTrExtra},
     props: {
-        tr: {type: Object, required: true}
+        tr: {type: Object, required: true},
+        index: {type: Number, required: true},
     },
     data() {
         return {

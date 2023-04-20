@@ -1,5 +1,6 @@
 @extends('base')
 
+
 @section('body')
     <body
         class="vertical-layout vertical-menu-modern material-vertical-layout material-layout vertical-collapsed-menu 2-columns   menu-collapsed fixed-navbar"
@@ -57,6 +58,18 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
+                    <div class="image-fullscreen">
+                        <div class="image-fullscreen-gestion">
+                            <div class="image-fullscreen-gestion-panel">
+                                <button class="btn-image-close"><i class="material-icons">close</i></button>
+                                <button class="btn-image-zoom-in"><i class="material-icons">zoom_in</i></button>
+                                <button class="btn-image-zoom-out"><i class="material-icons">zoom_out</i></button>
+                            </div>
+                            <div class="image-fullscreen-gestion-image">
+                                <img draggable="false"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,12 +93,10 @@
     @vite('resources/js/vendor/unison.js')
     @vite(['resources/js/vendor/app-menu.js','resources/js/vendor/material-app.js'])
     @vite('resources/js/vendor/app.js')
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
             integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
             crossorigin="anonymous"></script>
-
-
+    @vite('resources/js/image.js')
     @stack('js')
     <script src="{{ asset('/sw.js') }}"></script>
     <script>

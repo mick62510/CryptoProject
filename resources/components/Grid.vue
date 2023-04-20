@@ -11,7 +11,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <grid-tbody-tr v-for="tr in tbody" :tr="tr"></grid-tbody-tr>
+                <grid-tbody-tr v-for="(tr,index) in tbody" :tr="tr" :index="index"></grid-tbody-tr>
                 </tbody>
             </table>
             <Bootstrap5Pagination :data="this.pagination" align="right"

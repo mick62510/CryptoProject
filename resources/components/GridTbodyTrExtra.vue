@@ -12,9 +12,7 @@
                                 {{ row.label }} :
                                 <span v-if="row.ext && row.ext === 'image'" class="show-image">
                                     <br/>
-                                      <a :href="row.value" class="open-image" target="_blank">
-                                        <img :src="row.value" alt="" class="w-50">
-                                    </a>
+                                        <img :src="row.value" alt="" class="w-50 img-extendable">
                                 </span>
                                 <strong v-html="row.value" v-else></strong>
                             </div>
@@ -27,26 +25,19 @@
 </template>
 <script>
 
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
-import photoswipe from 'photoswipe'
+
 
 export default {
     name: "GridTbodyTrExtra",
     props: {
         tr: {type: Object, required: true},
-        id: {type: Number, required: true}
+        id: {type: Number, required: true},
+        index: {type: Number, required: true},
     },
     created() {
 
     }, mounted() {
-        const lightbox = new PhotoSwipeLightbox({
-            gallery: '.show-image',
-            children: 'a.open-image',
-            mouseMovePan: true,
-            pswpModule: () => photoswipe
-        });
-        lightbox.init();
+
     }
 }
 </script>

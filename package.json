@@ -28,7 +28,6 @@
         "jquery.steps": "^1.1.4",
         "laravel-vue-pagination": "^4.1.0",
         "perfect-scrollbar": "^1.5.5",
-        "photoswipe": "^5.3.6",
         "vue": "^3.2.47"
     }
 }

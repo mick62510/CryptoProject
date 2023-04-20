@@ -13,7 +13,6 @@
 
 @push('js')
     @vite('resources/js/form-file.js')
-    @vite('resources/js/image.js')
 @endpush
 
 
