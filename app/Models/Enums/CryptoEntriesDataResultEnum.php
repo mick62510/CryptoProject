@@ -6,7 +6,7 @@ enum CryptoEntriesDataResultEnum: string
 {
     use EnumToArray;
 
-    case win = 'Gagné';
-    case loose = 'Perdu';
+    case win = 'Win';
+    case loose = 'Loose';
     case be = 'Be';
 }
