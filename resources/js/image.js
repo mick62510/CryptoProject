@@ -8,13 +8,11 @@ $(document).ready(function () {
         let imageFullscreen = $('.image-fullscreen');
         imageFullscreen.find('.image-fullscreen-gestion img').attr('src', src);
         imageFullscreen.fadeIn(500, function () {
-            console.log(imageFullscreen.find('.image-fullscreen-gestion-panel').offset().top)
-
             window.scrollTo(0, 0);
         });
 
     }).on('click', '.image-fullscreen-gestion-panel button.btn-image-close', function () {
-        console.log("eza");
+
         $('.image-fullscreen').fadeOut(500);
     }).on('click', '.image-fullscreen-gestion-panel button.btn-image-zoom-in', function () {
         let image = $(".image-fullscreen-gestion-image").find('img');
@@ -28,9 +26,7 @@ $(document).ready(function () {
         let height = image.height() - 100;
         image.height(height);
         image.width(width);
-    });
-
-    $(".image-fullscreen-gestion-image").mousemove(function (e) {
+    }).on('mousemove', '.image-fullscreen-gestion-image', function (e) {
         if (clicking) {
             let image = $(".image-fullscreen-gestion-image");
             image.scrollLeft(image.scrollLeft() + (previousX - e.clientX));
