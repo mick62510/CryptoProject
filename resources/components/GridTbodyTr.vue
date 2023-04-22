@@ -7,8 +7,7 @@
                 <i class="material-icons" v-if="this.show">remove</i>
                 <i class="material-icons" v-else>add</i>
             </span>
-            <span v-else>
-                 {{ td.value }}
+            <span v-else v-html="td.value">
             </span>
         </td>
         <td>

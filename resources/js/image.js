@@ -26,7 +26,8 @@ $(document).ready(function () {
         let height = image.height() - 100;
         image.height(height);
         image.width(width);
-    }).on('mousemove', '.image-fullscreen-gestion-image', function (e) {
+    })
+    $(document).on('mousemove', '.image-fullscreen .image-fullscreen-gestion-image', function (e) {
         if (clicking) {
             let image = $(".image-fullscreen-gestion-image");
             image.scrollLeft(image.scrollLeft() + (previousX - e.clientX));
@@ -34,12 +35,13 @@ $(document).ready(function () {
             previousX = e.clientX;
             previousY = e.clientY;
         }
-    }).mouseup(function () {
+    }).on('mouseup', '.image-fullscreen .image-fullscreen-gestion-image', function () {
+
 
         clicking = false;
-    }).mouseleave(function (e) {
+    }).on('mouseleave', '.image-fullscreen .image-fullscreen-gestion-image', function () {
         clicking = false;
-    }).mousedown(function (e) {
+    }).on('mousedown', '.image-fullscreen .image-fullscreen-gestion-image', function (e) {
         e.preventDefault();
         previousX = e.clientX;
         previousY = e.clientY;

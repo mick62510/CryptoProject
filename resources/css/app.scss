@@ -39,6 +39,12 @@ table {
                         }
                     }
                 }
+
+                .text-margin {
+                    padding: 5px 10px;
+                    font-weight: bold;
+                    border-radius: 6px;
+                }
             }
 
             &.extend-row-show {
