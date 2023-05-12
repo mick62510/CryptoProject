@@ -16,11 +16,11 @@ class CryptoEntriesValidated extends CryptoEntriesNotValidated implements toArra
         $data['image_after_result'] = asset('storage/' . $data['image_after_result']);
 
         if ($data['result'] === 'win') {
-            $data['result'] = '<i class="bg-success text-white text-margin">' . $data['result'] . '</i>';
+            $data['result'] = '<i class="bg-success text-white text-margin">Win</i>';
         } elseif ($data['result'] === 'loose') {
-            $data['result'] = '<i class="bg-danger text-white text-margin">' . $data['result'] . '</i>';
+            $data['result'] = '<i class="bg-danger text-white text-margin">Lose</i>';
         } else {
-            $data['result'] = '<i class="bg-warning text-white text-margin">' . $data['result'] . '</i>';
+            $data['result'] = '<i class="bg-warning text-white text-margin">Be</i>';
         }
 
         $data['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $data['created_at'])

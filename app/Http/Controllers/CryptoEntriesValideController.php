@@ -51,13 +51,21 @@ class CryptoEntriesValideController extends AbstractGridController
                     'display' => false,
                     'label' => 'ID',
                 ],
-                'trend' => [
-                    'field' => 'trend',
-                    'label' => 'Type',
+                'createdAt' => [
+                    'field' => 'created_at',
+                    'label' => 'Crée le'
+                ],
+                'result' => [
+                    'field' => 'result',
+                    'label' => 'Résultat',
                 ],
                 'trend_type' => [
                     'field' => 'trend_type',
                     'label' => 'Tendance',
+                ],
+                'trend' => [
+                    'field' => 'trend',
+                    'label' => 'Type',
                 ],
                 'actif_code' => [
                     'model' => 'actif',
@@ -68,14 +76,8 @@ class CryptoEntriesValideController extends AbstractGridController
                     'field' => 'risk_reward',
                     'label' => 'Risque-récompense',
                 ],
-                'result' => [
-                    'field' => 'result',
-                    'label' => 'Résultat',
-                ],
-                'createdAt' => [
-                    'field' => 'created_at',
-                    'label' => 'Crée le'
-                ],
+
+
                 'actions' => [
                     'show' => [
                         'label' => '<a href="%s" class="btn btn-primary"><i class="material-icons">zoom_in</i></a>',

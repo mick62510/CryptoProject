@@ -27,7 +27,6 @@ export default defineConfig({
                 'resources/js/vendor/chartjs/doughnut-simple.js',
                 'resources/js/vendor/chartjs/pie.js',
                 'resources/js/vendor/chartjs/pie-simple.js',
-
             ],
             refresh: true,
 
