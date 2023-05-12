@@ -22,6 +22,7 @@ export default defineConfig({
                 'resources/js/image.js',
                 'resources/js/select2.js',
                 'resources/js/grid.js',
+                'resources/js/dashboard.js',
                 'resources/js/vendor/chartjs/doughnut.js',
                 'resources/js/vendor/chartjs/doughnut-simple.js',
                 'resources/js/vendor/chartjs/pie.js',
