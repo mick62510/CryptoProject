@@ -48,6 +48,12 @@ class GridFactory
                 $grid->addWhere($where);
             }
         }
+        if (array_key_exists('orders', $config)) {
+            foreach ($config['orders'] as $order) {
+                $orderClass = (new GridOrderFactory())->create($order);
+                $grid->addOrder($orderClass);
+            }
+        }
 
         return $grid;
     }

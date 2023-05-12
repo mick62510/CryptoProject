@@ -7,6 +7,7 @@ use App\Http\Service\Grid\Config\GridColumn;
 use App\Http\Service\Grid\Config\GridColumnFilter;
 use App\Http\Service\Grid\Config\GridExtra;
 use App\Http\Service\Grid\Config\GridExtraColumn;
+use App\Http\Service\Grid\Config\GridOrder;
 use App\Http\Service\Grid\Config\GridWhere;
 use App\Models\CryptoEntries;
 use Illuminate\Database\Eloquent\Model;
@@ -42,6 +43,7 @@ class GridLengthAwarePaginatorFactory
 
         $this->initColumnsJoin($builder);
         $this->initExtrasJoin($builder);
+        $this->initOrderBy($this->config->getOrders(), $builder);
 
         return $builder->paginate(10);
     }
@@ -103,6 +105,19 @@ class GridLengthAwarePaginatorFactory
             if ($model = $column->getModel()) {
                 $this->initJoin($DB, $model);
             }
+        }
+    }
+
+    private function initOrderBy(Collection $collection, Builder $builder): void
+    {
+        /** @var GridOrder $item */
+        foreach ($collection->all() as $item) {
+            if ($model = $item->getModel()) {
+                $class = $this->getModelTable($model);
+            } else {
+                $class = $this->primaryModelReflect->getTable();
+            }
+            $builder->orderBy($class . '.' . $item->getField(), $item->getType());
         }
     }
 

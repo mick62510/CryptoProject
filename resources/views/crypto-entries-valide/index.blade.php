@@ -16,5 +16,5 @@
 @endsection
 
 @push('js')
-    @vite('resources/js/new-grid.js')
+    @vite('resources/js/grid.js')
 @endpush

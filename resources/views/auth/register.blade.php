@@ -13,61 +13,63 @@
                         </div>
                         <div class="card-content">
                             <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
-                                <span>Create your account</span>
+                                <span>Créer un nouveau compte</span>
                             </p>
                             <div class="card-body">
                                 <form class="form-horizontal" action="{{ route('register') }}" method="POST">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                                    @if($errors->get('name'))
+                                        <div class="alert alert-danger">{{$errors->get('name')}}</div>
+                                    @endif
                                     <fieldset class="form-group position-relative has-icon-left">
-                                        @if($errors->get('name'))
-                                            <div class="alert alert-danger">{{$errors->get('name')}}</div>
-                                        @endif
                                         <input type="text" class="form-control" id="name" name="name"
-                                               placeholder="User Name">
+                                               value="{{old('name')}}"
+                                               placeholder="Prénom / Pseudo">
                                         <div class="form-control-position">
                                             <i class="la la-user"></i>
                                         </div>
                                     </fieldset>
+                                    @if($errors->get('email'))
+                                        <div class="alert alert-danger">{{$errors->get('email')[0]}}</div>
+                                    @endif
                                     <fieldset class="form-group position-relative has-icon-left">
-                                        @if($errors->get('email'))
-                                            <div class="alert alert-danger">{{$errors->get('email')}}</div>
-                                        @endif
                                         <input type="email" class="form-control" id="email" name="email"
-                                               placeholder="Your Email Address" required>
+                                               placeholder="Email" value="{{old('email')}}" required>
                                         <div class="form-control-position">
                                             <i class="la la-envelope"></i>
                                         </div>
                                     </fieldset>
+                                    @if($errors->get('password'))
+                                        <div class="alert alert-danger">{{$errors->get('password')[0]}}</div>
+                                    @endif
                                     <fieldset class="form-group position-relative has-icon-left">
-                                        @if($errors->get('password'))
-                                            <div class="alert alert-danger">{{$errors->get('password')}}</div>
-                                        @endif
+
                                         <input type="password" class="form-control" id="password" name="password"
-                                               placeholder="Enter Password" required>
+                                               placeholder="Mot de passe" required>
                                         <div class="form-control-position">
                                             <i class="la la-key"></i>
                                         </div>
                                     </fieldset>
+                                    @if($errors->get('password_confirmation'))
+                                        <div
+                                            class="alert alert-danger">{{$errors->get('password_confirmation')}}</div>
+                                    @endif
                                     <fieldset class="form-group position-relative has-icon-left">
-                                        @if($errors->get('password_confirmation'))
-                                            <div
-                                                class="alert alert-danger">{{$errors->get('password_confirmation')}}</div>
-                                        @endif
                                         <input type="password" class="form-control" id="password_confirmation"
                                                name="password_confirmation"
-                                               placeholder="Confirmation Password" required>
+                                               placeholder="Confirmation Mot de passe" required>
                                         <div class="form-control-position">
                                             <i class="la la-key"></i>
                                         </div>
                                     </fieldset>
                                     <button type="submit" class="btn btn-outline-info btn-block">
-                                        <i class="la la-user"></i> Register
+                                        <i class="la la-user"></i> S'enregistrer
                                     </button>
                                 </form>
                             </div>
                             <div class="card-body">
                                 <a href="{{ route('login') }}" class="btn btn-outline-danger btn-block">
-                                    <i class="ft-unlock"></i>Login
+                                    <i class="ft-unlock"></i> Connexion
                                 </a>
                             </div>
                         </div>

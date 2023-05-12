@@ -23,4 +23,5 @@ Route::name('entries.')->prefix('entries')->controller(CryptoEntriesController::
         Route::get('/ajax-grid-data', 'ajaxGridData')->name('ajaxGridData');
         Route::get('/{id}', 'show')->name('show');
     });
+
 });

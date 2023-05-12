@@ -15,6 +15,7 @@ class Grid implements toArrayInterface
     public string $model;
     public string $dataTransform;
     public Collection $wheres;
+    public Collection $orders;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class Grid implements toArrayInterface
         $this->filters = new Collection;
         $this->extra = new Collection;
         $this->wheres = new Collection;
+        $this->orders = new collection;
     }
 
     public function toArray(): array
@@ -127,6 +129,21 @@ class Grid implements toArrayInterface
     public function addWhere(GridWhere $gridWhere): void
     {
         $this->wheres->add($gridWhere);
+    }
+
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function setOrders(Collection $orders): void
+    {
+        $this->orders = $orders;
+    }
+
+    public function addOrder(GridOrder $gridOrder): void
+    {
+        $this->orders->add($gridOrder);
     }
 
 }

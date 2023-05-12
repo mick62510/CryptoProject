@@ -5,6 +5,7 @@ namespace App\Http\Service\Grid\Transform;
 use App\Http\Service\Grid\Config\Interface\toArrayInterface;
 use App\Models\Enums\CryptoEntriesTrendEnum;
 use App\Models\Enums\CryptoEntriesTrendTypeEnum;
+use Carbon\Carbon;
 
 class CryptoEntriesValidated extends CryptoEntriesNotValidated implements toArrayInterface
 {
@@ -21,6 +22,9 @@ class CryptoEntriesValidated extends CryptoEntriesNotValidated implements toArra
         } else {
             $data['result'] = '<i class="bg-warning text-white text-margin">' . $data['result'] . '</i>';
         }
+
+        $data['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $data['created_at'])
+            ->translatedFormat('d M Y H:m');
 
         return $data;
     }

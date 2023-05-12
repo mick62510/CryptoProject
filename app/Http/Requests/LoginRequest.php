@@ -45,7 +45,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'Ces informations d\'identification ne correspondent pas',
             ]);
         }
 
@@ -81,5 +81,15 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'The email is required.',
+            'email.email' => 'The email needs to have a valid format.',
+            'email.exists' => 'The email is not registered in the system.',
+            'email' => 'eza',
+        ];
     }
 }

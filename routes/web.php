@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::name('crypto.')->prefix('crypto')->group(function () {
         include 'web/crypto-entries.php';
+        include 'web/crypto-ajax.php';
     });
 
     Route::get('/', [HomeController::class, 'index'])->name('home');

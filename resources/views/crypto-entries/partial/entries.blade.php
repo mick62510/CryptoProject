@@ -63,7 +63,7 @@ $trend = $model->trend;
                 </div>
                 <div class="col-xl-3 col-lg-6 col-md-12">
                     <fieldset class="form-group">RR
-                        <input type="text" class="form-control" name="risk_reward" placeholder="aucun texte"
+                        <input type="number" class="form-control" name="risk_reward" placeholder="0.00"
                                value="{{ old('risk_reward') ? old('risk_reward') : $model->risk_reward}}">
                     </fieldset>
                 </div>

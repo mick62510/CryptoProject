@@ -7,6 +7,7 @@ use App\Http\Factory\Model\Update\CryptoEntriesUpdateFactory;
 use App\Http\Interface\ModelCreateFactoryInterface;
 use App\Http\Interface\ModelUpdateFactoryInterface;
 use App\Models\CryptoEntriesActif;
+use Illuminate\Support\Facades\DB;
 
 class CryptoEntriesActifRepository extends AbstractBaseRepository
 {
@@ -29,4 +30,5 @@ class CryptoEntriesActifRepository extends AbstractBaseRepository
     {
         return $this->updateFactory;
     }
+
 }

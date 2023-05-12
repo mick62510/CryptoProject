@@ -10,6 +10,7 @@
             <div class="content-header row">
             </div>
             <div class="content-body">
+                @include('layout.alert')
                 @yield('content')
             </div>
         </div>

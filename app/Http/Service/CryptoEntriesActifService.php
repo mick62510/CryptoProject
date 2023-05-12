@@ -4,6 +4,7 @@ namespace App\Http\Service;
 
 use App\Http\Repository\CryptoEntriesActifRepository;
 use App\Models\CryptoEntriesActif;
+use Illuminate\Support\Facades\Auth;
 
 class CryptoEntriesActifService
 {
@@ -26,4 +27,18 @@ class CryptoEntriesActifService
 
         return $data;
     }
+
+    public function getAllToSelect(): array
+    {
+        $return = [];
+        /** @var CryptoEntriesActif $actif */
+        foreach ($this->all() as $actif) {
+            $return[] = [
+                'value' => $actif->code,
+                'label' => $actif->title,
+            ];
+        }
+        return $return;
+    }
+
 }

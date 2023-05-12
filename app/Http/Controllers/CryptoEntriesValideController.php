@@ -29,6 +29,12 @@ class CryptoEntriesValideController extends AbstractGridController
     public function getConfigGrid(): array
     {
         return [
+            'orders' => [
+                [
+                    'field' => 'created_at',
+                    'type' => 'DESC'
+                ]
+            ],
             'where' => [
                 [
                     'field' => 'result',
@@ -65,6 +71,10 @@ class CryptoEntriesValideController extends AbstractGridController
                 'result' => [
                     'field' => 'result',
                     'label' => 'Résultat',
+                ],
+                'createdAt' => [
+                    'field' => 'created_at',
+                    'label' => 'Crée le'
                 ],
                 'actions' => [
                     'show' => [

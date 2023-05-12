@@ -24,4 +24,13 @@ trait EnumToArray
     {
         return array_combine(self::names(), self::values());
     }
+
+    public static function getByName(mixed $findId)
+    {
+        foreach (self::array() as $id => $value) {
+            if ($id === $findId) {
+                return $value;
+            }
+        }
+    }
 }

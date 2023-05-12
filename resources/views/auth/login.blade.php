@@ -12,11 +12,14 @@
                                                   alt="branding logo"></div>
                         </div>
                         <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
-                            <span>Login</span>
+                            <span>Connexion</span>
                         </h6>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
+                            @if ($errors->any())
+                                @include('crypto-entries.partial.errors')
+                            @endif
                             <form class="form-horizontal form-simple" action="{{ route('login') }}" method="POST">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                                 <fieldset class="form-group position-relative has-icon-left mb-0">
@@ -28,7 +31,7 @@
                                 </fieldset>
                                 <fieldset class="form-group position-relative has-icon-left">
                                     <input type="password" class="form-control" id="password" name="password"
-                                           placeholder="Enter Password" required>
+                                           placeholder="Mot de passe" required>
                                     <div class="form-control-position">
                                         <i class="la la-key"></i>
                                     </div>
@@ -37,22 +40,24 @@
                                     <div class="col-sm-6 col-12 text-center text-sm-left">
                                         <fieldset>
                                             <input type="checkbox" id="remember" name="remember" class="chk-remember">
-                                            <label for="remember-me"> Remember Me</label>
+                                            <label for="remember-me"> Souviens-toi de moi</label>
                                         </fieldset>
                                     </div>
                                     <div class="col-sm-6 col-12 text-center text-sm-right">
-                                        <a href="{{ route('password.request') }}" class="card-link">Forgot Password?</a>
+                                        <a href="{{ route('password.request') }}" class="card-link">Mot de passe oublié
+                                            ?</a>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-info btn-block"><i class="ft-unlock"></i> Login
+                                <button type="submit" class="btn btn-info btn-block"><i class="ft-unlock"></i> Se
+                                    connecter
                                 </button>
                             </form>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="">
-                            <p class="float-xl-right text-center m-0">Create an account ?
-                                <a href="{{route('register')}}" class="card-link">Sign Up</a></p>
+                            <p class="float-xl-right text-center m-0">
+                                <a href="{{route('register')}}" class="card-link">Créer un nouveau compte ?</a></p>
                         </div>
                     </div>
                 </div>
