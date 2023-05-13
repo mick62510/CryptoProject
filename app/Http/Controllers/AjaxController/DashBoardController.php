@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Response;
 
 class DashBoardController
 {
-    public function __construct(private readonly CryptoEntriesService $cryptoEntriesService, private readonly CryptoEntriesActifService $actifService,
-                                private readonly Request              $request)
+    public function __construct(private readonly CryptoEntriesService      $cryptoEntriesService,
+                                private readonly CryptoEntriesActifService $actifService,
+                                private readonly Request                   $request)
     {
     }
 

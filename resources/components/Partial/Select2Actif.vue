@@ -1,5 +1,5 @@
 <template>
-    <div class="col-3" v-if="load">
+    <div class="col-sm-12 col-md-3" v-if="load">
         <Multiselect
             v-model="values"
             mode="tags"

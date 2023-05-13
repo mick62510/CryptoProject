@@ -5,10 +5,13 @@
             <div class="row border border-primary">
                 <div class="col-12">
                     Filters :
-                    <select2-actif :route-data-actif="routeDataActif" @update="updateFilters"></select2-actif>
+                    <div class="row">
+                        <select2-actif :route-data-actif="routeDataActif" @update="updateFilters"></select2-actif>
+                        <disable-be @update="updateFilters"></disable-be>
+                    </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-75">
                 <div class="col-md-10 col-sm-12">
                     <div class="row">
                         <div class="col-md-3 col-sm-12">
@@ -37,10 +40,11 @@ import ChartDoughnut from "../Partial/Chart/ChartDoughnut.vue";
 import StatsRiskReward from "../Partial/Stats/StatsRiskReward.vue";
 import ChartLine from "../Partial/Chart/ChartLine.vue";
 import Select2Actif from "../Partial/Select2Actif.vue";
+import DisableBe from "./DisableBe.vue";
 
 export default {
     name: "dashboard",
-    components: {Select2Actif, ChartLine, StatsRiskReward, ChartDoughnut, ChartRadar, DashboardFilter},
+    components: {DisableBe, Select2Actif, ChartLine, StatsRiskReward, ChartDoughnut, ChartRadar, DashboardFilter},
     props: {
         routeActifRadar: {type: String, required: true},
         routeDoughnutWinLoose: {type: String, required: true},
@@ -52,6 +56,7 @@ export default {
         return {
             filters: {
                 actif: {},
+                be: true,
             },
         }
     },

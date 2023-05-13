@@ -127,8 +127,12 @@ table {
     }
 }
 
-.select2 {
-    .select2-results {
+.container-chart-line {
+    height: 100%;
+    overflow-x: auto;
 
+    @media (max-width: 576px) {
+        height: 400px;
     }
+
 }

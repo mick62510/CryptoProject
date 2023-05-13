@@ -1,6 +1,6 @@
 <template>
-    <div v-if="loaded">
-        <Radar :data="radarData" :options="options"></Radar>
+    <div v-if="loaded" class="container-chart-line">
+        <Radar :data="radarData" :options="options" style="margin: 0 auto;"></Radar>
     </div>
 </template>
 
@@ -42,6 +42,7 @@ export default {
                 .then((response) => {
                     this.radarData = response.data.data;
                     this.options = response.data.options;
+
                     ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
                     this.loaded = true;

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="loaded">
+    <div v-if="loaded" class="container-chart-line">
         <Line :data="radarData" :options="options"></Line>
     </div>
 </template>

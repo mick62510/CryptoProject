@@ -88,14 +88,15 @@ class CryptoEntriesService
 
     public function getDoughnutWinLooseBe(array $filters = []): array
     {
-        $actifs = array_key_exists('actif', $filters) ? $filters['actif'] : [];
-        $data = $this->repository->getWinLooseBe(Auth::id(), $actifs);
+        $actifs = $this->getFilterActifs($filters);
+        $activeBe = $this->getFilterBe($filters);
+
+        $data = $this->repository->getWinLooseBe(Auth::id(), $actifs, $activeBe);
 
         $values = [];
         $labels = [];
         /** @var Object $actif */
         foreach ($data as $actif) {
-
             $labels[] = CryptoEntriesDataResultEnum::getByName($actif->result);
             $values[] = $actif->total;
         }
@@ -103,26 +104,47 @@ class CryptoEntriesService
         return $this->chartService->getDoughnut($labels, $values, [ChartService::COLOR_WIN, ChartService::COLOR_LOSE, ChartService::COLOR_BE]);
     }
 
+    private function getFilterActifs(array $filters = [])
+    {
+        return array_key_exists('actif', $filters) ? $filters['actif'] : [];
+    }
+
+    private function getFilterBe(array $filters = []): bool
+    {
+        if (array_key_exists('be', $filters)) {
+            return $filters['be'] === 'true';
+        }
+        return true;
+    }
+
     public function getRatioRiskReward(array $filters = []): array
     {
-        $actifs = array_key_exists('actif', $filters) ? $filters['actif'] : [];
+        $actifs = $this->getFilterActifs($filters);
+        $be = $this->getFilterBe($filters);
 
-        return $this->repository->getMinHeightMediumRiskReward(Auth::id(), $actifs);
+        return $this->repository->getMinHeightMediumRiskReward(Auth::id(), $actifs, $be);
     }
 
     public function getLineNumberEntries(array $filters = []): array
     {
         //TODO faire les 12 derniers mois.
 
-        $actifs = array_key_exists('actif', $filters) ? $filters['actif'] : [];
+        $actifs = $this->getFilterActifs($filters);
+        $activeBe = $this->getFilterBe($filters);
         $labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
         $data = $this->repository->getNumberEntries(Auth::id(), actifs: $actifs)->all();
         $dataWin = $this->repository->getNumberEntries(Auth::id(), 'win', $actifs)->all();
         $dataLose = $this->repository->getNumberEntries(Auth::id(), 'lose', $actifs)->all();
-        $dataBe = $this->repository->getNumberEntries(Auth::id(), 'be', $actifs)->all();
+        $dataBe = [];
+
         $dataAll = $this->transformKeyToInt($data);
         $dataWin = $this->transformKeyToInt($dataWin);
-        $dataBe = $this->transformKeyToInt($dataBe);
+
+        if ($activeBe) {
+            $dataBe = $this->repository->getNumberEntries(Auth::id(), 'be', $actifs)->all();
+            $dataBe = $this->transformKeyToInt($dataBe);
+        }
+
 
         for ($m = 1; $m <= 12; $m++) {
             if (!array_key_exists($m, $dataAll)) {
@@ -134,7 +156,7 @@ class CryptoEntriesService
             if (!array_key_exists($m, $dataLose)) {
                 $dataLose[$m] = 0;
             }
-            if (!array_key_exists($m, $dataBe)) {
+            if (!array_key_exists($m, $dataBe) && $activeBe) {
                 $dataBe[$m] = 0;
             }
         }
@@ -142,7 +164,6 @@ class CryptoEntriesService
         $dataAll = $this->ksortAndGetArrayValues($dataAll);
         $dataWin = $this->ksortAndGetArrayValues($dataWin);
         $dataLose = $this->ksortAndGetArrayValues($dataLose);
-        $dataBe = $this->ksortAndGetArrayValues($dataBe);
 
         $data = [
             [
@@ -163,13 +184,17 @@ class CryptoEntriesService
                 'backgroundColor' => ChartService::COLOR_LOSE,
                 'borderColor' => ChartService::COLOR_LOSE,
             ],
-            [
+        ];
+
+        if ($activeBe) {
+            $dataBe = $this->ksortAndGetArrayValues($dataBe);
+            $data[] = [
                 'label' => 'Trades Be',
                 'data' => $dataBe,
                 'backgroundColor' => ChartService::COLOR_BE,
                 'borderColor' => ChartService::COLOR_BE,
-            ]
-        ];
+            ];
+        }
 
         return $this->chartService->getLine($labels, $data);
     }

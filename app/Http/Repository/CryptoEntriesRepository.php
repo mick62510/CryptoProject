@@ -65,9 +65,15 @@ class CryptoEntriesRepository extends AbstractBaseRepository
     }
 
 
-    public function getWinLooseBe(?int $userId = null, array $actifs = []): Collection
+    public function getWinLooseBe(?int $userId = null, array $actifs = [], bool $activeBe = true): Collection
     {
         $db = DB::table('crypto_entries')->select(['result', DB::raw('count(result) as total')]);
+        $db->where('user_id', '=', $userId);
+        $db->whereNotNull('result');
+
+        if (!$activeBe) {
+            $db->where('result', '<>', 'be');
+        }
 
         if ($actifs) {
             $db->whereIn('actif_code', $actifs);
@@ -76,12 +82,15 @@ class CryptoEntriesRepository extends AbstractBaseRepository
         return $db->groupBy('result')->get();
     }
 
-    public function getMinHeightMediumRiskReward(?int $userId = null, array $actifs = []): array
+    public function getMinHeightMediumRiskReward(?int $userId = null, array $actifs = [], bool $activeBe = true): array
     {
         $qb = DB::table('crypto_entries');
 
         if ($userId) {
             $qb->where('user_id', '=', $userId);
+        }
+        if (!$activeBe) {
+            $qb->where('result', '<>', 'be');
         }
 
         if ($actifs) {
