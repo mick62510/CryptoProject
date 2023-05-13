@@ -6,6 +6,8 @@
                :route-ratio-risk-reward="{{json_encode(route('crypto.ajax.dashboard.ratio-risk-reward'))}}"
                :route-line-number-entries="{{json_encode(route('crypto.ajax.dashboard.line-number-entries'))}}"
                :route-data-actif="{{json_encode(route('crypto.ajax.dashboard.data-actif'))}}"
+               :route-cache="{{json_encode(route('crypto.ajax.dashboard.update-cache'))}}"
+               :filters-cache="{{json_encode($filters)}}"
     ></dashboard>
 
 @endsection

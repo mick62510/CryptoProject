@@ -4,15 +4,19 @@ namespace App\Http\Controllers\AjaxController;
 
 use App\Http\Service\CryptoEntriesActifService;
 use App\Http\Service\CryptoEntriesService;
+use App\Http\Service\DashboardCacheService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
 
 class DashBoardController
 {
-    public function __construct(private readonly CryptoEntriesService      $cryptoEntriesService,
-                                private readonly CryptoEntriesActifService $actifService,
-                                private readonly Request                   $request)
+    public function __construct(
+        private readonly CryptoEntriesService      $cryptoEntriesService,
+        private readonly CryptoEntriesActifService $actifService,
+        private readonly Request                   $request,
+        private readonly DashboardCacheService     $cacheService)
     {
     }
 
@@ -52,4 +56,12 @@ class DashBoardController
     {
         return Response::json($this->actifService->getAllToSelect());
     }
+
+    public function updateCache(): void
+    {
+        $filters = $this->request->all();
+
+        $this->cacheService->createUpdate($filters);
+    }
+
 }

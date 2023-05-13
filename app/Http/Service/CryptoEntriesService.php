@@ -127,18 +127,17 @@ class CryptoEntriesService
 
     public function getLineNumberEntries(array $filters = []): array
     {
-        //TODO faire les 12 derniers mois.
-
         $actifs = $this->getFilterActifs($filters);
         $activeBe = $this->getFilterBe($filters);
         $labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
         $data = $this->repository->getNumberEntries(Auth::id(), actifs: $actifs)->all();
         $dataWin = $this->repository->getNumberEntries(Auth::id(), 'win', $actifs)->all();
-        $dataLose = $this->repository->getNumberEntries(Auth::id(), 'lose', $actifs)->all();
+        $dataLose = $this->repository->getNumberEntries(Auth::id(), 'loose', $actifs)->all();
         $dataBe = [];
 
         $dataAll = $this->transformKeyToInt($data);
         $dataWin = $this->transformKeyToInt($dataWin);
+        $dataLose = $this->transformKeyToInt($dataLose);
 
         if ($activeBe) {
             $dataBe = $this->repository->getNumberEntries(Auth::id(), 'be', $actifs)->all();

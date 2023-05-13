@@ -23,6 +23,7 @@ export default {
     components: {Multiselect},
     props: {
         routeDataActif: {type: String, required: true},
+        defaultActifs: {type: Object, required: false},
     },
     data() {
         return {
@@ -44,6 +45,7 @@ export default {
         }
     },
     mounted() {
+        this.values = this.defaultActifs;
         this.initData(this.routeDataActif);
     }
 }

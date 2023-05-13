@@ -6,8 +6,9 @@
                 <div class="col-12">
                     Filters :
                     <div class="row">
-                        <select2-actif :route-data-actif="routeDataActif" @update="updateFilters"></select2-actif>
-                        <disable-be @update="updateFilters"></disable-be>
+                        <select2-actif :route-data-actif="routeDataActif" @update="updateFilters"
+                                       :default-actifs="filters.actif"></select2-actif>
+                        <disable-be @update="updateFilters" :default-value="this.filters.be"></disable-be>
                     </div>
                 </div>
             </div>
@@ -41,6 +42,8 @@ import StatsRiskReward from "../Partial/Stats/StatsRiskReward.vue";
 import ChartLine from "../Partial/Chart/ChartLine.vue";
 import Select2Actif from "../Partial/Select2Actif.vue";
 import DisableBe from "./DisableBe.vue";
+import axios from "axios";
+
 
 export default {
     name: "dashboard",
@@ -51,6 +54,8 @@ export default {
         routeRatioRiskReward: {type: String, required: true},
         routeLineNumberEntries: {type: String, required: true},
         routeDataActif: {type: String, required: true},
+        routeCache: {type: String, required: true},
+        filtersCache: {type: Object, required: false},
     },
     data() {
         return {
@@ -68,8 +73,17 @@ export default {
             if (filter in this.filters) {
                 this.filters[filter] = values;
             }
+            this.updateCache();
+        },
+        updateCache: function () {
+            axios.get(this.routeCache, {params: this.filters});
         },
     },
+    beforeMount() {
+
+        this.filters.be = this.filtersCache.be !== 'false';
+        this.filters.actif = this.filtersCache.actif;
+    }
 }
 </script>
 

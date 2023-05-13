@@ -13,6 +13,7 @@ Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::get('/ratio-risk-reward', 'ratioRiskReward')->name('ratio-risk-reward');
         Route::get('/line-number-entries', 'lineNumberEntries')->name('line-number-entries');
         Route::get('/data-actif', 'dataActif')->name('data-actif');
+        Route::get('/update-cache', 'updateCache')->name('update-cache');
     });
 });
 

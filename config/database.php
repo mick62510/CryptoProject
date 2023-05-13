@@ -34,7 +34,11 @@ return [
     */
 
     'connections' => [
-
+        'cache' => [
+            'driver' => 'database',
+            'table' => 'cache_table',
+            'connection' => 'mysql', // ou toute autre connexion définie
+        ],
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
