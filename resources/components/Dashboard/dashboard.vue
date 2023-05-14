@@ -1,6 +1,5 @@
 <template>
     <section>
-        <dashboard-filter></dashboard-filter>
         <section>
             <div class="row border border-primary">
                 <div class="col-12">
@@ -60,7 +59,7 @@ export default {
     data() {
         return {
             filters: {
-                actif: {},
+                actif: [],
                 be: true,
             },
         }
@@ -80,9 +79,10 @@ export default {
         },
     },
     beforeMount() {
-
-        this.filters.be = this.filtersCache.be !== 'false';
-        this.filters.actif = this.filtersCache.actif;
+        if (this.filtersCache) {
+            this.filters.be = this.filtersCache.be !== 'false';
+            this.filters.actif = this.filtersCache.actif;
+        }
     }
 }
 </script>
