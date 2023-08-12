@@ -109,7 +109,7 @@ class CryptoEntriesCreateFactory implements ModelCreateFactoryInterface
             $model = $this->actifAdvancedFactory->create(['user_id' => $userId, 'actif_code' => $actifCode, 'value' => $value]);
             $model->save();
         }
-        
+
         return $model;
     }
 }
