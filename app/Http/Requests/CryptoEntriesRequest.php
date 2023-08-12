@@ -20,7 +20,7 @@ class CryptoEntriesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'date|required',
+            'date' => 'required',
             'actif_code' => 'required',
             'trend' => ['required', 'in:' . CryptoEntriesTrendEnum::toNamesString()],
             'trend_type' => ['required', 'in:' . CryptoEntriesTrendTypeEnum::toNamesString()],

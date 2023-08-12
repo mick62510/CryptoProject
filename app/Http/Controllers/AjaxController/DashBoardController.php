@@ -57,6 +57,7 @@ class DashBoardController
         return Response::json($this->actifService->getAllToSelect());
     }
 
+
     public function updateCache(): void
     {
         $filters = $this->request->all();

@@ -21,6 +21,7 @@ export default defineConfig({
                 'resources/js/form-file.js',
                 'resources/js/image.js',
                 'resources/js/select2.js',
+                'resources/js/crypto-entries-form-entries.js',
                 'resources/js/grid.js',
                 'resources/js/dashboard.js',
                 'resources/js/vendor/chartjs/doughnut.js',

@@ -5,7 +5,7 @@
             mode="tags"
             :close-on-select="false"
             :searchable="true"
-            :create-option="true"
+            :create-option="false"
             :options="options"
             @select="change"
             @deselect="change"

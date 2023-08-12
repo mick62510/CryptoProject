@@ -2,6 +2,9 @@
 /** @var \App\Models\CryptoEntries $model */
 $date = $model->date ?: now();
 $date = old('date') ?: $date;
+$date = $date->toDate();
+$dateString = $date->format('Y-m-d');
+$dateString .= 'T'. $date->format('H:i');
 $actif = $model->actif()?->first();
 $actifCode = $actif?->code;
 $trend = $model->trend;
@@ -15,7 +18,7 @@ $trend = $model->trend;
                         <label>
                             Date et Heure
                             <input type="datetime-local" class="form-control" name="date"
-                                   value="{{ $date }}">
+                                   value="{{ $dateString }}">
                         </label>
                     </fieldset>
                 </div>
@@ -25,7 +28,7 @@ $trend = $model->trend;
                     <fieldset class="form-group">
                         <label>
                             Actif
-                            <select class="form-control" name="actif_code">
+                            <select class="form-control" name="actif_code" id="actif_code">
                                 <option disabled selected></option>
                                 @foreach ($casts['actif'] as $id => $title)
                                     <option value="{{$id}}"
@@ -35,6 +38,7 @@ $trend = $model->trend;
                         </label>
                     </fieldset>
                 </div>
+                <form-entries :casts="{{json_encode($casts['actif_advanced'])}}"></form-entries>
                 <div class="col-xl-2 col-lg-6 col-md-12">
                     <label>Type</label>
                     <fieldset>
@@ -62,7 +66,7 @@ $trend = $model->trend;
                     </fieldset>
                 </div>
                 <div class="col-xl-3 col-lg-6 col-md-12">
-                    <fieldset class="form-group">RR
+                    <fieldset class="form-group">RR Objectif
                         <input type="number" class="form-control" name="risk_reward" placeholder="0.00"
                                value="{{ old('risk_reward') ? old('risk_reward') : $model->risk_reward}}">
                     </fieldset>
@@ -71,3 +75,29 @@ $trend = $model->trend;
         </div>
     </div>
 </div>
+
+@push('js')
+    @vite('resources/js/crypto-entries-form-entries.js')
+    <script>
+        $(document).ready(function(){
+            $('#actif_code').change(function (){
+                let val = $('#actif_code').find(":selected").val();
+                let forex = $('#fieldset-forex');
+                let crypto = $('#fieldset-crypto');
+
+                if(val === 'forex'){
+                    forex.removeClass('hidden');
+                } else {
+                    forex.addClass('hidden');
+                    //TODO remove value
+                }
+
+                if(val === 'crypto') {
+                    crypto.removeClass('hidden');
+                } else {
+                    crypto.addClass('hidden');
+                }
+            })
+        });
+    </script>
+@endpush

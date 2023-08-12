@@ -49,6 +49,10 @@ class CryptoEntries extends Model
     {
         return $this->belongsTo(CryptoEntriesZone::class);
     }
+    public function actifAdvanced(): BelongsTo
+    {
+        return $this->belongsTo(CryptoEntriesActifAdvanced::class);
+    }
 
     public function fill(array $attributes)
     {

@@ -16,12 +16,13 @@ class CryptoEntriesService
 {
 
     public function __construct(
-        private readonly CryptoEntriesRepository     $repository,
-        private readonly CryptoEntriesActifService   $actifService,
-        private readonly CryptoEntriesDataService    $dataService,
-        private readonly CryptoEntriesOprService     $oprService,
-        private readonly CryptoEntriesAnalyzeService $analyzeService,
-        private readonly ChartService                $chartService,
+        private readonly CryptoEntriesRepository           $repository,
+        private readonly CryptoEntriesActifService         $actifService,
+        private readonly CryptoEntriesDataService          $dataService,
+        private readonly CryptoEntriesOprService           $oprService,
+        private readonly CryptoEntriesAnalyzeService       $analyzeService,
+        private readonly ChartService                      $chartService,
+        private readonly CryptoEntriesActifAdvancedService $service
     )
     {
 
@@ -48,6 +49,7 @@ class CryptoEntriesService
             'data' => $this->dataService->getCastsValues(),
             'opr' => $this->oprService->getCastsValues(),
             'analyze' => $this->analyzeService->getCastsValues(),
+            'actif_advanced' => $this->service->regroupByActifCode()
         ];
     }
 

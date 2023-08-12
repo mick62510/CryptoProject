@@ -1,7 +1,8 @@
-
 import "block-ui"
+import "@vueform/multiselect"
 
 $(document).ready(function () {
+
     $('form input[type=file]').change(function () {
         let input = $(this);
         input.parents('fieldset').find('.alert').addClass('hidden');

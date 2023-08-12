@@ -114,6 +114,21 @@ class CryptoEntriesController extends AbstractGridController
                     ],
                 ],
                 [
+                    'label' => 'Actif avancée',
+                    'columns' => [
+                        'actif_code' => [
+                            'model' => 'actifAdvanced',
+                            'field' => 'actif_code',
+                            'label' => 'Actif',
+                        ],
+                        'value' => [
+                            'model' => 'actifAdvanced',
+                            'field' => 'value',
+                            'label' => 'Valeur',
+                        ],
+                    ],
+                ],
+                [
                     'label' => 'Zone',
                     'columns' => [
                         'area_d' => [
