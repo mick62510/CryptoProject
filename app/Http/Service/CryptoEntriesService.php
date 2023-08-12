@@ -94,16 +94,37 @@ class CryptoEntriesService
         $activeBe = $this->getFilterBe($filters);
 
         $data = $this->repository->getWinLooseBe(Auth::id(), $actifs, $activeBe);
-
+        $colors = [];
         $values = [];
         $labels = [];
+        $hasBe = false;
+        $hasLose = false;
+        $hasWin = false;
         /** @var Object $actif */
         foreach ($data as $actif) {
+            if ($actif->result === 'be') {
+                $hasBe = true;
+            } elseif ($actif->result === 'lose') {
+                $hasLose = true;
+            } elseif ($actif->result === 'win') {
+                $hasWin = true;
+            }
             $labels[] = CryptoEntriesDataResultEnum::getByName($actif->result);
             $values[] = $actif->total;
         }
 
-        return $this->chartService->getDoughnut($labels, $values, [ChartService::COLOR_WIN, ChartService::COLOR_LOSE, ChartService::COLOR_BE]);
+        if ($hasWin) {
+            $colors[] = ChartService::COLOR_WIN;
+        }
+        if ($hasLose) {
+            $colors[] = ChartService::COLOR_LOSE;
+        }
+        if ($hasBe) {
+            $colors[] = ChartService::COLOR_BE;
+        }
+
+
+        return $this->chartService->getDoughnut($labels, $values, $colors);
     }
 
     private function getFilterActifs(array $filters = [])

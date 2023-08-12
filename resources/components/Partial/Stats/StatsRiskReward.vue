@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-content">
             <div class="card-body">
-                <h4 class="card-title">Risk Reward</h4>
+                <h4 class="card-title">Risk Reward Objectif</h4>
             </div>
             <div class="card-body">
                 <div class="row">
