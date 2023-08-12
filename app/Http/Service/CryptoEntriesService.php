@@ -97,32 +97,20 @@ class CryptoEntriesService
         $colors = [];
         $values = [];
         $labels = [];
-        $hasBe = false;
-        $hasLose = false;
-        $hasWin = false;
         /** @var Object $actif */
         foreach ($data as $actif) {
-            if ($actif->result === 'be') {
-                $hasBe = true;
-            } elseif ($actif->result === 'lose') {
-                $hasLose = true;
-            } elseif ($actif->result === 'win') {
-                $hasWin = true;
-            }
             $labels[] = CryptoEntriesDataResultEnum::getByName($actif->result);
             $values[] = $actif->total;
         }
-
-        if ($hasWin) {
-            $colors[] = ChartService::COLOR_WIN;
+        foreach ($labels as $label) {
+            if ($label === 'Be') {
+                $colors[] = ChartService::COLOR_BE;
+            } elseif ($label === 'Lose') {
+                $colors[] = ChartService::COLOR_LOSE;
+            } elseif ($label === 'Win') {
+                $colors[] = ChartService::COLOR_WIN;
+            }
         }
-        if ($hasLose) {
-            $colors[] = ChartService::COLOR_LOSE;
-        }
-        if ($hasBe) {
-            $colors[] = ChartService::COLOR_BE;
-        }
-
 
         return $this->chartService->getDoughnut($labels, $values, $colors);
     }
