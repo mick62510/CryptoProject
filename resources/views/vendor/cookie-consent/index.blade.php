@@ -1,4 +1,3 @@
-@dd($cookieConsentConfig)
 @if(!isset($cookieConsentConfig) || !$cookieConsentConfig['enabled'])
     @include('cookie-consent::dialogContents')
     <script>
