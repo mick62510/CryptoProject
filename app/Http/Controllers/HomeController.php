@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Service\DashboardCacheService;
-use App\Models\CryptoEntries;
-use App\Models\CryptoEntriesAnalyze;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
@@ -14,7 +13,7 @@ class HomeController extends Controller
     {
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
         return view('home', ['filters' => $this->cacheService->get()]);
     }

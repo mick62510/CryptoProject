@@ -53,6 +53,7 @@
         <div class="content-wrapper">
             <div class="content-body">
                 <div id="app">
+
                     @include('layout.alert')
                     @yield('content')
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -78,7 +79,7 @@
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
-
+    @include('cookie-consent::index')
     @include('layout.footer')
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -110,5 +111,6 @@
             });
         }
     </script>
+
     </body>
 @endsection
