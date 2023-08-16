@@ -158,7 +158,7 @@ class GridLengthAwarePaginatorFactory
     {
         if ($this->canCreateJoin($model)) {
             $table = $this->getModelTable($model);
-            $DB->join($table, $this->getForeignKeyName($model), '=', $this->getOwnerKeyName($model));
+            $DB->leftJoin($table, $this->getForeignKeyName($model), '=', $this->getOwnerKeyName($model));
             $this->addJoinCreated($model);
         }
     }
