@@ -11,6 +11,7 @@ use App\Models\CryptoEntries;
 use App\Models\CryptoEntriesActif;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class CryptoEntriesController extends AbstractGridController
@@ -69,6 +70,13 @@ class CryptoEntriesController extends AbstractGridController
                     'label' => 'Risque-récompense',
                 ],
                 'actions' => [
+                    'delete' => [
+                        'label' => '<a href="%s" class="btn btn-danger"><i class="material-icons">delete</i></a>',
+                        'route' => 'crypto.entries.delete',
+                        'params' => [
+                            'column' => 'id',
+                        ],
+                    ],
                     'show' => [
                         'label' => '<a href="%s" class="btn btn-primary"><i class="material-icons">zoom_in</i></a>',
                         'route' => 'crypto.entries.show',
@@ -247,9 +255,12 @@ class CryptoEntriesController extends AbstractGridController
         return to_route('crypto.entries.index');
     }
 
-    public function destroy()
+    //TODO transform to method put in vuejs
+    public function delete(int $cryptoEntriesId): RedirectResponse
     {
+        $this->service->delete($cryptoEntriesId);
 
+        return back();
     }
 
     public function ajaxUpload(CryptoEntriesFormFileRequest $request): JsonResponse

@@ -38,6 +38,11 @@ class CryptoEntriesValideService
         if ($model = $this->repository->find($id)) {
             $this->repository->update($model, $data);
         }
-
+    }
+    public function delete(int $cryptoEntriesId): void
+    {
+        if ($model = $this->repository->find($cryptoEntriesId)) {
+            $this->repository->delete([$cryptoEntriesId]);
+        }
     }
 }

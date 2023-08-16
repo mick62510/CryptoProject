@@ -79,6 +79,13 @@ class CryptoEntriesValideController extends AbstractGridController
 
 
                 'actions' => [
+                    'delete' => [
+                        'label' => '<a href="%s" class="btn btn-danger"><i class="material-icons">delete</i></a>',
+                        'route' => 'crypto.entries.delete',
+                        'params' => [
+                            'column' => 'id',
+                        ],
+                    ],
                     'show' => [
                         'label' => '<a href="%s" class="btn btn-primary"><i class="material-icons">zoom_in</i></a>',
                         'route' => 'crypto.entries.valide.show',
@@ -106,6 +113,21 @@ class CryptoEntriesValideController extends AbstractGridController
                             'model' => 'opr',
                             'field' => 'integration',
                             'label' => 'Intégration',
+                        ],
+                    ],
+                ],
+                [
+                    'label' => 'Actif avancée',
+                    'columns' => [
+                        'actif_code' => [
+                            'model' => 'actifAdvanced',
+                            'field' => 'actif_code',
+                            'label' => 'Actif',
+                        ],
+                        'value' => [
+                            'model' => 'actifAdvanced',
+                            'field' => 'value',
+                            'label' => 'Valeur',
                         ],
                     ],
                 ],
@@ -247,5 +269,12 @@ class CryptoEntriesValideController extends AbstractGridController
         $this->service->update($id, $request->validationData());
 
         return to_route('crypto.entries.valide.index');
+    }
+    //TODO transform to method put in vuejs
+    public function delete(int $cryptoEntriesId): RedirectResponse
+    {
+        $this->service->delete($cryptoEntriesId);
+
+        return back();
     }
 }

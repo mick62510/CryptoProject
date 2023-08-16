@@ -80,6 +80,13 @@ class CryptoEntriesService
         }
     }
 
+    public function delete(int $cryptoEntriesId)
+    {
+        if ($model = $this->find($cryptoEntriesId)) {
+            $this->repository->delete([$cryptoEntriesId]);
+        }
+    }
+
     public function getRadarActifDataByUserId(array $filters = []): array
     {
         $actifs = array_key_exists('actif', $filters) ? $filters['actif'] : [];

@@ -11,6 +11,7 @@ Route::name('entries.')->prefix('entries')->controller(CryptoEntriesController::
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::post('/store', 'store')->name('store');
     Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{id}','delete')->name('delete');
     Route::post('/upload-file', 'ajaxUpload')->name('ajax-upload');
     Route::get('/ajax-grid-data', 'ajaxGridData')->name('ajaxGridData');
     Route::get('/{id}', 'show')->name('show');
@@ -19,6 +20,7 @@ Route::name('entries.')->prefix('entries')->controller(CryptoEntriesController::
         Route::get('/list-validated', 'index')->name('index');
         Route::get('/update/{id}', 'update')->name('update')->middleware(CryptoEntriesNotValidated::class);
         Route::post('/store/{id}', 'store')->name('store');
+        Route::get('/delete/{id}','delete')->name('delete');
         Route::post('/upload-file', 'ajaxUpload')->name('ajax-upload');
         Route::get('/ajax-grid-data', 'ajaxGridData')->name('ajaxGridData');
         Route::get('/{id}', 'show')->name('show');
