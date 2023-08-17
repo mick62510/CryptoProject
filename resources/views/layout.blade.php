@@ -53,7 +53,6 @@
         <div class="content-wrapper">
             <div class="content-body">
                 <div id="app">
-
                     @include('layout.alert')
                     @yield('content')
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -97,11 +96,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
             integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
             crossorigin="anonymous"></script>
+
+    @vite('resources/js/btn-confirmation.js')
     @vite('resources/js/image.js')
     @stack('js')
     <script src="{{ asset('/sw.js') }}"></script>
     <script>
-        if (!navigator.serviceWorker.controller) {
+        if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
             navigator.serviceWorker.register("/sw.js").then(function (registration) {
                 // Registration was successful
                 console.log('Laravel PWA: ServiceWorker registration successful with scope: ', registration.scope);

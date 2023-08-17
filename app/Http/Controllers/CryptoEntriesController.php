@@ -71,7 +71,7 @@ class CryptoEntriesController extends AbstractGridController
                 ],
                 'actions' => [
                     'delete' => [
-                        'label' => '<a href="%s" class="btn btn-danger"><i class="material-icons">delete</i></a>',
+                        'label' => '<a href="%s" class="btn btn-danger btn-confirmation"><i class="material-icons">delete</i></a>',
                         'route' => 'crypto.entries.delete',
                         'params' => [
                             'column' => 'id',
