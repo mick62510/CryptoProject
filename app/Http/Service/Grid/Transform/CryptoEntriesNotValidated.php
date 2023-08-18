@@ -27,6 +27,8 @@ class CryptoEntriesNotValidated implements toArrayInterface
             $data['trend_type'] = '<i class="material-icons text-success">trending_up</i>';
         } elseif ($data['trend_type'] === 'bearish') {
             $data['trend_type'] = '<i class="material-icons text-danger">trending_down</i>';
+        }else {
+            $data['trend_type'] = '<i class="la la-arrows-h text-warning" style="font-size: 1.5rem"></i>';
         }
 
         return $data;
