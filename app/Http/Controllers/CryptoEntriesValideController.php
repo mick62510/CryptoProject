@@ -86,13 +86,13 @@ class CryptoEntriesValideController extends AbstractGridController
                             'column' => 'id',
                         ],
                     ],
-                    'show' => [
+                    /**'show' => [
                         'label' => '<a href="%s" class="btn btn-primary"><i class="material-icons">zoom_in</i></a>',
                         'route' => 'crypto.entries.valide.show',
                         'params' => [
                             'column' => 'id',
                         ],
-                    ],
+                    ],**/
                 ],
             ],
             'extra' => [

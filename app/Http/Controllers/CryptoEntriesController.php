@@ -77,13 +77,13 @@ class CryptoEntriesController extends AbstractGridController
                             'column' => 'id',
                         ],
                     ],
-                    'show' => [
+                 /**   'show' => [
                         'label' => '<a href="%s" class="btn btn-primary"><i class="material-icons">zoom_in</i></a>',
                         'route' => 'crypto.entries.show',
                         'params' => [
                             'column' => 'id',
                         ],
-                    ],
+                    ],**/
                     'edit' => [
                         'label' => '<a href="%s" class="btn btn-secondary"><i class="material-icons">settings</i></a>',
                         'route' => 'crypto.entries.edit',
