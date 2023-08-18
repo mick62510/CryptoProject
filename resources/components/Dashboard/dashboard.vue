@@ -26,7 +26,8 @@
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-12">
-                    <stats-risk-reward :route-data="routeRatioRiskReward" :filters="filters"></stats-risk-reward>
+                    <stats-risk-reward :route-data="routeRatioRiskReward" :filters="filters" :is-valid="false"></stats-risk-reward>
+                    <stats-risk-reward :route-data="routeRatioRiskReward" :filters="filters" :is-valid="true"></stats-risk-reward>
                 </div>
             </div>
         </section>

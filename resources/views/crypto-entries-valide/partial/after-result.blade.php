@@ -11,7 +11,7 @@
                     <fieldset class="form-group">
                         <label>
                             Résultat :
-                            <select class="form-control" name="result">
+                            <select class="form-control" name="result" id="result">
                                 <option disabled selected></option>
                                 @foreach ($casts['result'] as $id => $title)
                                     <option value="{{$id}}"
@@ -21,6 +21,15 @@
                         </label>
                     </fieldset>
                 </div>
+                <fieldset class="form-group">
+                    <label>
+                        <fieldset class="form-group">RR validé :
+                            <input type="number" class="form-control" name="risk_reward_valid" id="risk_reward_valid" placeholder="0.00"
+                                   value="{{ old('risk_reward_valid') ? old('risk_reward_valid') : $model->risk_reward_valid}}">
+                        </fieldset>
+
+                    </label>
+                </fieldset>
             </div>
             <div class="row">
                 <div class="col-xl-3 col-lg-6 col-md-12">
@@ -51,3 +60,22 @@
         </div>
     </div>
 </div>
+
+
+@push('js')
+    <script>
+        $(document).ready(function(){
+            $('#result').change(function (){
+                let val = $('#result').find(":selected").val();
+                let rrval = 1;
+
+                if(val === 'loose') {
+                    rrval = -1;
+                } else if (val === 'be') {
+                    rrval = 0;
+                }
+                $('#risk_reward_valid').val(rrval)
+            })
+        });
+    </script>
+@endpush

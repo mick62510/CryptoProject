@@ -33,6 +33,10 @@ class CryptoEntriesUpdateFactory implements ModelUpdateFactoryInterface
             $data['image_after_result'] = $this->createDataFactory->moveFileAndGetFileName((array)$data, 'image_after_result', 'after_');
         }
 
+        if(array_key_exists('risk_reward_valid',(array)$data)){
+            $model->risk_reward_valid = $data['risk_reward_valid'];
+        }
+
         $model->fill($data);
         $model->analyze()->first()->fill((array)$data)->save();
         $model->data()->first()->fill((array)$data)->save();

@@ -82,7 +82,7 @@ class CryptoEntriesRepository extends AbstractBaseRepository
         return $db->groupBy('result')->get();
     }
 
-    public function getMinHeightMediumRiskReward(?int $userId = null, array $actifs = [], bool $activeBe = true): array
+    public function getMinHeightMediumRiskReward(?int $userId = null, array $actifs = [], bool $activeBe = true,bool $valid = false): array
     {
         $qb = DB::table('crypto_entries');
 
@@ -96,8 +96,11 @@ class CryptoEntriesRepository extends AbstractBaseRepository
         if ($actifs) {
             $qb->whereIn('actif_code', $actifs);
         }
-
-        return ['max' => $qb->max('risk_reward'), 'min' => $qb->min('risk_reward'), 'median' => number_format($qb->average('risk_reward'), 2)];
+        if($valid){
+            return ['max' => $qb->max('risk_reward_valid'), 'min' => $qb->min('risk_reward_valid'), 'median' => number_format($qb->average('risk_reward_valid'), 2)];
+        }else {
+            return ['max' => $qb->max('risk_reward'), 'min' => $qb->min('risk_reward'), 'median' => number_format($qb->average('risk_reward'), 2)];
+        }
     }
 
     public function getNumberEntries(?int $userId = null, ?string $result = null, array $actifs = []): Collection

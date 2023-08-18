@@ -2,7 +2,8 @@
     <div class="card">
         <div class="card-content">
             <div class="card-body">
-                <h4 class="card-title">Risk Reward Objectif</h4>
+                <h4 class="card-title" v-if="isValid">Risk Reward Validé</h4>
+                <h4 class="card-title" v-else>Risk Reward Objectif</h4>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -30,6 +31,7 @@ export default {
     props: {
         routeData: {type: String, required: true},
         filters: {type: Object, required: true},
+        isValid : {type:Boolean,required:true}
     },
     data() {
         return {
@@ -50,6 +52,7 @@ export default {
     },
     methods: {
         initData: function (url, params = {}) {
+            params.valid = this.isValid;
             axios.get(url, {params: params})
                 .then((response) => {
                     this.minData = response.data.min;

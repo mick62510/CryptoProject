@@ -23,6 +23,7 @@ class CryptoEntriesValideRequest extends FormRequest
             'text_after_result' => 'nullable',
             'image_after_result' => 'nullable',
             'result' => 'required',
+            'risk_reward_valid' => 'required'
         ];
     }
 }

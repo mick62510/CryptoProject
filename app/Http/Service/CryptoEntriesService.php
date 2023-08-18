@@ -138,9 +138,10 @@ class CryptoEntriesService
     public function getRatioRiskReward(array $filters = []): array
     {
         $actifs = $this->getFilterActifs($filters);
+        $valid = filter_var($filters['valid'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
         $be = $this->getFilterBe($filters);
 
-        return $this->repository->getMinHeightMediumRiskReward(Auth::id(), $actifs, $be);
+        return $this->repository->getMinHeightMediumRiskReward(Auth::id(), $actifs, $be,$valid);
     }
 
     public function getLineNumberEntries(array $filters = []): array
