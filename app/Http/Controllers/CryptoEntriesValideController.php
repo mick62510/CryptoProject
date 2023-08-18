@@ -72,12 +72,10 @@ class CryptoEntriesValideController extends AbstractGridController
                     'field' => 'title',
                     'label' => 'Actif',
                 ],
-                'risk_reward' => [
-                    'field' => 'risk_reward',
-                    'label' => 'Risque-récompense',
+                'risk_reward_valid' => [
+                    'field' => 'risk_reward_valid',
+                    'label' => 'RR Validé',
                 ],
-
-
                 'actions' => [
                     'delete' => [
                         'label' => '<a href="%s" class="btn btn-danger btn-confirmation"><i class="material-icons">delete</i></a>',
@@ -210,6 +208,19 @@ class CryptoEntriesValideController extends AbstractGridController
                             'ext' => 'image',
                             'field' => 'image_after_result',
                             'label' => 'Image',
+                        ],
+                    ],
+                ],
+                [
+                    'label' => 'Risque Reward',
+                    'columns' => [
+                        'risk_reward' => [
+                            'field' => 'risk_reward',
+                            'label' => 'Objectif',
+                        ],
+                        'risk_reward_valid' => [
+                            'field' => 'risk_reward_valid',
+                            'label' => 'Validé',
                         ],
                     ],
                 ],
