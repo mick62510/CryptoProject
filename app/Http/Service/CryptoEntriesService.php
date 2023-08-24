@@ -188,6 +188,9 @@ class CryptoEntriesService
                     if (!array_key_exists($jour, $dataLose)) {
                         $dataLose[$jour] = 0;
                     }
+                    if (!array_key_exists($jour, $dataBe) && $activeBe) {
+                        $dataBe[$jour] = 0;
+                    }
                 }
             } elseif ($type === 'between') {
                 $dateDebut = Carbon::parse($value[0]);
@@ -205,6 +208,9 @@ class CryptoEntriesService
                     }
                     if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataLose)) {
                         $dataLose[$dateDebut->month . $dateDebut->day] = 0;
+                    }
+                    if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataBe) && $activeBe) {
+                        $dataBe[$dateDebut->month . $dateDebut->day] = 0;
                     }
                 }
             } elseif ($type === 'year') {
