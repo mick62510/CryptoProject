@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 
 class CryptoEntriesService
 {
@@ -89,8 +90,7 @@ class CryptoEntriesService
 
     public function getRadarActifDataByUserId(array $filters = []): array
     {
-        $actifs = array_key_exists('actif', $filters) ? $filters['actif'] : [];
-        $dataActifs = $this->repository->getAllGroupByActifFilterUserId(Auth::id(), $actifs);
+        $dataActifs = $this->repository->getAllByFilters(Auth::id(), $filters);
 
         return $this->chartService->getRadar($dataActifs['title'], 'Lose', $dataActifs['loose'], 'Win', $dataActifs['win']);
     }
@@ -100,7 +100,7 @@ class CryptoEntriesService
         $actifs = $this->getFilterActifs($filters);
         $activeBe = $this->getFilterBe($filters);
 
-        $data = $this->repository->getWinLooseBe(Auth::id(), $actifs, $activeBe);
+        $data = $this->repository->getWinLooseBe(Auth::id(), $actifs, $activeBe, $filters);
         $colors = [];
         $values = [];
         $labels = [];
@@ -141,17 +141,17 @@ class CryptoEntriesService
         $valid = filter_var($filters['valid'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
         $be = $this->getFilterBe($filters);
 
-        return $this->repository->getMinHeightMediumRiskReward(Auth::id(), $actifs, $be,$valid);
+        return $this->repository->getMinHeightMediumRiskReward(Auth::id(), $actifs, $be, $valid);
     }
 
     public function getLineNumberEntries(array $filters = []): array
     {
         $actifs = $this->getFilterActifs($filters);
         $activeBe = $this->getFilterBe($filters);
-        $labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-        $data = $this->repository->getNumberEntries(Auth::id(), actifs: $actifs)->all();
-        $dataWin = $this->repository->getNumberEntries(Auth::id(), 'win', $actifs)->all();
-        $dataLose = $this->repository->getNumberEntries(Auth::id(), 'loose', $actifs)->all();
+
+        $data = $this->repository->getNumberEntries(Auth::id(), actifs: $actifs, filters: $filters)->all();
+        $dataWin = $this->repository->getNumberEntries(Auth::id(), 'win', $actifs, $filters)->all();
+        $dataLose = $this->repository->getNumberEntries(Auth::id(), 'loose', $actifs, $filters)->all();
         $dataBe = [];
 
         $dataAll = $this->transformKeyToInt($data);
@@ -159,25 +159,74 @@ class CryptoEntriesService
         $dataLose = $this->transformKeyToInt($dataLose);
 
         if ($activeBe) {
-            $dataBe = $this->repository->getNumberEntries(Auth::id(), 'be', $actifs)->all();
+            $dataBe = $this->repository->getNumberEntries(Auth::id(), 'be', $actifs, $filters)->all();
+
             $dataBe = $this->transformKeyToInt($dataBe);
         }
 
+        if (array_key_exists('date', $filters)) {
+            $date = $filters['date'];
+            $type = $date['type'];
+            $value = $date['value'];
 
-        for ($m = 1; $m <= 12; $m++) {
-            if (!array_key_exists($m, $dataAll)) {
-                $dataAll[$m] = 0;
-            }
-            if (!array_key_exists($m, $dataWin)) {
-                $dataWin[$m] = 0;
-            }
-            if (!array_key_exists($m, $dataLose)) {
-                $dataLose[$m] = 0;
-            }
-            if (!array_key_exists($m, $dataBe) && $activeBe) {
-                $dataBe[$m] = 0;
+            if ($type === 'month') {
+                $annee = $value['year'];
+                $mois = $value['month'] + 1;
+                $premierJour = Carbon::createFromDate($annee, $mois, 1);
+                $nombreJours = $premierJour->daysInMonth;
+                $labels = [];
+
+                for ($jour = 1; $jour <= $nombreJours; $jour++) {
+                    $date = Carbon::createFromDate($annee, $mois, $jour);
+                    $labels[] = $date->dayName . " " . $date->day;
+                    if (!array_key_exists($jour, $dataAll)) {
+                        $dataAll[$jour] = 0;
+                    }
+                    if (!array_key_exists($jour, $dataWin)) {
+                        $dataWin[$jour] = 0;
+                    }
+                    if (!array_key_exists($jour, $dataLose)) {
+                        $dataLose[$jour] = 0;
+                    }
+                }
+            } elseif ($type === 'between') {
+                $dateDebut = Carbon::parse($value[0]);
+                $dateFin = Carbon::parse($value[1]);
+                $labels = [];
+
+                while ($dateDebut->lte($dateFin)) {
+                    $labels[] = $dateDebut->monthName . " " . $dateDebut->dayName . " " . $dateDebut->day;
+                    $dateDebut->addDay();
+                    if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataAll)) {
+                        $dataAll[$dateDebut->month . $dateDebut->day] = 0;
+                    }
+                    if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataWin)) {
+                        $dataWin[$dateDebut->month . $dateDebut->day] = 0;
+                    }
+                    if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataLose)) {
+                        $dataLose[$dateDebut->month . $dateDebut->day] = 0;
+                    }
+                }
+            } elseif ($type === 'year') {
+                $labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+
+                for ($m = 1; $m <= 12; $m++) {
+                    if (!array_key_exists($m, $dataAll)) {
+                        $dataAll[$m] = 0;
+                    }
+                    if (!array_key_exists($m, $dataWin)) {
+                        $dataWin[$m] = 0;
+                    }
+                    if (!array_key_exists($m, $dataLose)) {
+                        $dataLose[$m] = 0;
+                    }
+                    if (!array_key_exists($m, $dataBe) && $activeBe) {
+                        $dataBe[$m] = 0;
+                    }
+                }
             }
         }
+
 
         $dataAll = $this->ksortAndGetArrayValues($dataAll);
         $dataWin = $this->ksortAndGetArrayValues($dataWin);

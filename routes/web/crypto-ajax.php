@@ -14,6 +14,7 @@ Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::get('/line-number-entries', 'lineNumberEntries')->name('line-number-entries');
         Route::get('/data-actif', 'dataActif')->name('data-actif');
         Route::get('/update-cache', 'updateCache')->name('update-cache');
+        Route::get('/get-years','getYears')->name('get-years');
     });
 });
 

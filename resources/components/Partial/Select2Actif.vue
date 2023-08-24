@@ -1,54 +1,63 @@
 <template>
     <div class="col-sm-12 col-md-3" v-if="load">
-        <Multiselect
-            v-model="values"
-            mode="tags"
-            :close-on-select="false"
-            :searchable="true"
-            :create-option="false"
-            :options="options"
-            @select="change"
-            @deselect="change"
-        />
+        <div class="form-group">
+            <fieldset>
+                <label>Actif:</label>
+                <Multiselect
+                    v-model="selectedValues"
+                    mode="tags"
+                    :close-on-select="false"
+                    :searchable="true"
+                    :create-option="false"
+                    :options="options"
+                    @select="handleSelect"
+                    @deselect="handleDeselect"
+                />
+            </fieldset>
+        </div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import Multiselect from '@vueform/multiselect'
+import Multiselect from '@vueform/multiselect';
 
-//TODO IF BUG prod rm -rf node_moduels npm install
 export default {
     name: "Select2Actif",
-    components: {Multiselect},
+    components: { Multiselect },
     props: {
-        routeDataActif: {type: String, required: true},
-        defaultActifs: {type: Object, required: false},
+        routeDataActif: { type: String, required: true },
+        defaultActifs: { type: Object, required: false }
     },
     data() {
         return {
-            values: null,
+            selectedValues: [],
             options: [],
-            load: false,
-        }
+            load: false
+        };
     },
     methods: {
         initData: function (url, params = {}) {
-            axios.get(url, {params: params})
+            axios.get(url, { params: params })
                 .then((response) => {
                     this.options = response.data;
                     this.load = true;
-                })
+                });
         },
-        change() {
-            this.$emit('update', {filter: 'actif', values: this.values});
+        handleSelect() {
+            console.log('select')
+            this.$emit('update', { filter: 'actif', values: this.selectedValues });
+        },
+        handleDeselect() {
+            console.log('de-select')
+            this.$emit('update', { filter: 'actif', values: this.selectedValues });
         }
     },
-    mounted() {
-        this.values = this.defaultActifs;
+    beforeMount() {
+        this.selectedValues = this.defaultActifs;
         this.initData(this.routeDataActif);
     }
-}
+};
 </script>
 
 <style src="@vueform/multiselect/themes/default.css"></style>

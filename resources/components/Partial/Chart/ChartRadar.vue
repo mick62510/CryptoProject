@@ -26,16 +26,18 @@ export default {
     },
     watch: {
         filters: {
-            handler: function (val) {
-                if(val.actif && val.actif.length === 0){
+            immediate: true,
+            deep: true,
+            handler: function (val,oldVal) {
+                console.log("reload data")
+               if(val.actif && val.actif.length === 0){
                     this.initData(this.routeData, val);
                 }else if (val.actif && val.actif.length < 3) {
                     this.loaded = false;
                 } else {
                     this.initData(this.routeData, val);
                 }
-            },
-            deep: true,
+            }
         },
     },
     methods: {
@@ -55,11 +57,11 @@ export default {
         this.loaded = false
 
         try {
-            this.initData(this.routeData)
+            this.initData(this.routeData,this.filters)
         } catch (e) {
             console.error(e)
         }
-    },
+    }
 }
 </script>
 

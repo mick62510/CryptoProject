@@ -58,7 +58,7 @@ export default {
         this.loaded = false
 
         try {
-            this.initData(this.routeData)
+            this.initData(this.routeData,this.filters)
         } catch (e) {
             console.error(e)
         }

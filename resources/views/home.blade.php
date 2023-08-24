@@ -8,6 +8,7 @@
                :route-data-actif="{{json_encode(route('crypto.ajax.dashboard.data-actif'))}}"
                :route-cache="{{json_encode(route('crypto.ajax.dashboard.update-cache'))}}"
                :filters-cache="{{json_encode($filters)}}"
+               :route-get-years="{{json_encode(route('crypto.ajax.dashboard.get-years'))}}"
     ></dashboard>
 
 @endsection

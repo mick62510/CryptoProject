@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AjaxController;
 use App\Http\Service\CryptoEntriesActifService;
 use App\Http\Service\CryptoEntriesService;
 use App\Http\Service\DashboardCacheService;
+use App\Http\Service\DashboardService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
@@ -16,7 +17,8 @@ class DashBoardController
         private readonly CryptoEntriesService      $cryptoEntriesService,
         private readonly CryptoEntriesActifService $actifService,
         private readonly Request                   $request,
-        private readonly DashboardCacheService     $cacheService)
+        private readonly DashboardCacheService     $cacheService,
+        private readonly DashboardService          $dashboardService)
     {
     }
 
@@ -63,6 +65,11 @@ class DashBoardController
         $filters = $this->request->all();
 
         $this->cacheService->createUpdate($filters);
+    }
+
+    public function getYears(): JsonResponse
+    {
+        return  Response::json($this->dashboardService->getYears());
     }
 
 }

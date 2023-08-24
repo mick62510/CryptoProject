@@ -11,8 +11,9 @@
                     <div class="col">{{ minData }}</div>
                 </div>
                 <div class="row">
-                    <div class="col">Médiane</div>
-                    <div class="col"><span class="text-bold-700"> {{ medianData }}</span></div>
+                    <div class="col" v-if="isValid">% de réussite</div>
+                    <div class="col" v-else>Médiane</div>
+                    <div class="col"><span class="text-bold-700">{{ medianData }}</span></div>
                 </div>
                 <div class="row">
                     <div class="col">Maximum</div>
@@ -29,14 +30,12 @@ import axios from "axios";
 export default {
     name: "StatsRiskReward",
     props: {
-        routeData: {type: String, required: true},
-        filters: {type: Object, required: true},
-        isValid : {type:Boolean,required:true}
+        routeData: { type: String, required: true },
+        filters: { type: Object, required: true },
+        isValid: { type: Boolean, required: true }
     },
     data() {
         return {
-            options: null,
-            loaded: false,
             minData: null,
             medianData: null,
             maxData: null,
@@ -44,8 +43,10 @@ export default {
     },
     watch: {
         filters: {
-            handler: function (val) {
-                this.initData(this.routeData, val);
+            handler: function (val, oldVal) {
+                if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
+                    this.initData(this.routeData, val);
+                }
             },
             deep: true,
         },
@@ -53,22 +54,16 @@ export default {
     methods: {
         initData: function (url, params = {}) {
             params.valid = this.isValid;
-            axios.get(url, {params: params})
+            axios.get(url, { params: params })
                 .then((response) => {
                     this.minData = response.data.min;
                     this.medianData = response.data.median;
                     this.maxData = response.data.max;
-                    this.loaded = true;
                 })
         },
     },
     created() {
-        this.loaded = false
-
-        try {
-            this.initData(this.routeData)
-        } catch (e) {
-        }
+        this.initData(this.routeData);
     },
 }
 </script>
