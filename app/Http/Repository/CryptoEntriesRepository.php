@@ -130,7 +130,14 @@ class CryptoEntriesRepository extends AbstractBaseRepository
         if ($valid) {
             $max = $qb->max('risk_reward_valid');
             $min = $qb->min('risk_reward_valid');
-            $total = $qb->count();
+            $qb2 = $qb;
+
+            if($activeBe) {
+                $total = $qb2->where('result','<>','be')->count();
+            } else {
+                $total = $qb2->count();
+            }
+
             $nbWin = $qb->where('result','win')->count();
 
             return ['max' => $max, 'min' => $min, 'median' => number_format(($nbWin / $total) * 100, 2,',').'%'];
