@@ -149,7 +149,7 @@ class CryptoEntriesService
         $actifs = $this->getFilterActifs($filters);
         $activeBe = $this->getFilterBe($filters);
 
-        $data = $this->repository->getNumberEntries(Auth::id(), actifs: $actifs, filters: $filters)->all();
+        $data = $this->repository->getNumberEntries(Auth::id(), actifs: $actifs, filters: $filters,activeBe: $activeBe)->all();
         $dataWin = $this->repository->getNumberEntries(Auth::id(), 'win', $actifs, $filters)->all();
         $dataLose = $this->repository->getNumberEntries(Auth::id(), 'loose', $actifs, $filters)->all();
         $dataBe = [];

@@ -139,7 +139,7 @@ class CryptoEntriesRepository extends AbstractBaseRepository
         }
     }
 
-    public function getNumberEntries(?int $userId = null, ?string $result = null, array $actifs = [], array $filters = []): Collection
+    public function getNumberEntries(?int $userId = null, ?string $result = null, array $actifs = [], array $filters = [],$activeBe = true): Collection
     {
         $qb = CryptoEntries::query()
             ->orderBy('created_at');
@@ -150,7 +150,12 @@ class CryptoEntriesRepository extends AbstractBaseRepository
         }
 
         if (is_null($result)) {
-            $qb->whereNotNull('result');
+            if($activeBe) {
+                $qb->whereNotNull('result');
+            }else {
+                $qb->whereNotNull('result')->where('result','<>','be');
+            }
+
         } else {
             $qb->where('result', '=', $result);
         }
