@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\CookieConsentController;
+
+use App\Http\Controllers\CookieController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Request;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 })->name('home');
-Route::post('cookie-consent', [CookieConsentController::class, 'consent'])->name('cookie-consent');
+Route::get('cookie-policy', [CookieController::class, 'index'])->name('cookie-policy.index');
 Route::middleware('auth')->group(function () {
     Route::name('crypto.')->prefix('crypto')->group(function () {
         include 'web/crypto-entries.php';
