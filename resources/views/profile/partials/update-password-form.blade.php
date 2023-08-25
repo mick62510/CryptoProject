@@ -1,11 +1,4 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Update Password') }}
-        </h2>
-    </header>
-
-    @if (session('status') === 'password-updated')
+     @if (session('status') === 'password-updated')
         <p class="alert alert-success">{{ __('Saved.') }}</p>
     @endif
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
@@ -52,4 +45,4 @@
             <button type="submit" class="btn btn-primary mt-2">{{ __('Save') }}</button>
         </div>
     </form>
-</section>
+
