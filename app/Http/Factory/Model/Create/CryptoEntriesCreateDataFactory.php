@@ -16,6 +16,7 @@ class CryptoEntriesCreateDataFactory implements ModelCreateFactoryInterface
     public function create(mixed $data): CryptoEntriesData
     {
         $model = new CryptoEntriesData;
+        $model->text_before_result = $data['text_before_result'];
         $model->image_before_result = $this->moveFileAndGetFileName($data, 'image_before_result', 'before_');
 
         return $model;

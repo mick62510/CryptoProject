@@ -9,6 +9,7 @@ class CryptoEntriesDataUpdateFactory implements ModelUpdateFactoryInterface
 {
     public function update(Model $model, mixed $data): Model
     {
+        $model->text_before_result = $data['text_before_result'];
         return $model;
     }
 
