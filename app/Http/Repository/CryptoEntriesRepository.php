@@ -88,7 +88,6 @@ class CryptoEntriesRepository extends AbstractBaseRepository
             } elseif ($type === 'month') {
                 $builder->whereYear('created_at', $value['year'])
                     ->whereMonth('created_at', $value['month'] + 1);
-
             }
         }
         return $builder;
@@ -157,12 +156,10 @@ class CryptoEntriesRepository extends AbstractBaseRepository
         }
 
         if (is_null($result)) {
-            if($activeBe) {
-                $qb->whereNotNull('result');
-            }else {
-                $qb->whereNotNull('result')->where('result','<>','be');
+            $qb->whereNotNull('result');
+            if(!$activeBe) {
+                $qb->where('result','<>','be');
             }
-
         } else {
             $qb->where('result', '=', $result);
         }
@@ -180,7 +177,7 @@ class CryptoEntriesRepository extends AbstractBaseRepository
             } else if ($type === 'month') {
                 $qb->select(DB::raw("count(id) as count_total"), DB::raw("(DATE_FORMAT(created_at, '%d')) as month"))->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"));
             } else if ($type === 'between') {
-                $qb->select(DB::raw("count(id) as count_total"), DB::raw("(DATE_FORMAT(created_at, '%m%d')) as month"))->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"));
+                $qb->select(DB::raw("count(id) as count_total"), DB::raw("(DATE_FORMAT(created_at, '%Y%m%d')) as month"))->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"));
             }
         }
 

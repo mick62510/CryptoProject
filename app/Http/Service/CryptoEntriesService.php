@@ -153,7 +153,7 @@ class CryptoEntriesService
         $dataWin = $this->repository->getNumberEntries(Auth::id(), 'win', $actifs, $filters)->all();
         $dataLose = $this->repository->getNumberEntries(Auth::id(), 'loose', $actifs, $filters)->all();
         $dataBe = [];
-
+        $labels = [];
         $dataAll = $this->transformKeyToInt($data);
         $dataWin = $this->transformKeyToInt($dataWin);
         $dataLose = $this->transformKeyToInt($dataLose);
@@ -198,21 +198,23 @@ class CryptoEntriesService
                 $labels = [];
 
                 while ($dateDebut->lte($dateFin)) {
+
+                    if (!array_key_exists($dateDebut->format('Ymd'), $dataAll)) {
+                        $dataAll[$dateDebut->format('Ymd')] = 0;
+                    }
+                    if (!array_key_exists($dateDebut->format('Ymd'), $dataWin)) {
+                        $dataWin[$dateDebut->format('Ymd')] = 0;
+                    }
+                    if (!array_key_exists($dateDebut->format('Ymd'), $dataLose)) {
+                        $dataLose[$dateDebut->format('Ymd')] = 0;
+                    }
+                    if (!array_key_exists($dateDebut->format('Ymd'), $dataBe) && $activeBe) {
+                        $dataBe[$dateDebut->format('Ymd')] = 0;
+                    }
                     $labels[] = $dateDebut->monthName . " " . $dateDebut->dayName . " " . $dateDebut->day;
                     $dateDebut->addDay();
-                    if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataAll)) {
-                        $dataAll[$dateDebut->month . $dateDebut->day] = 0;
-                    }
-                    if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataWin)) {
-                        $dataWin[$dateDebut->month . $dateDebut->day] = 0;
-                    }
-                    if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataLose)) {
-                        $dataLose[$dateDebut->month . $dateDebut->day] = 0;
-                    }
-                    if (!array_key_exists($dateDebut->month . $dateDebut->day, $dataBe) && $activeBe) {
-                        $dataBe[$dateDebut->month . $dateDebut->day] = 0;
-                    }
                 }
+
             } elseif ($type === 'year') {
                 $labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
@@ -244,6 +246,7 @@ class CryptoEntriesService
                 'data' => $dataAll,
                 'backgroundColor' => ChartService::COLOR_ALL,
                 'borderColor' => ChartService::COLOR_ALL,
+                'borderDash' => [6]
             ],
             [
                 'label' => 'Trades WIN',
