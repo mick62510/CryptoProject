@@ -13,14 +13,14 @@
                 <div class="card-content">
                     <div class="card-header">
                         <div class="card-title font-large-1">
-                            Politique de Cookies de Trading-Journal
+                            Politique de Cookies de Mon-Journal-Trading
                         </div>
                     </div>
                     <div class="card-body">
 
                         <p class="font-medium-5">Dernière mise à jour : 25/08/2023</p>
                         <p>
-                        La présente Politique de Cookies explique comment Trading-Journal utilise des cookies et des technologies similaires sur notre site web www.trading-journal.com . Cette politique détaille les types de cookies que nous utilisons, pourquoi nous les utilisons, et comment vous pouvez gérer vos préférences en matière de cookies.
+                        La présente Politique de Cookies explique comment Mon-Journal-Trading utilise des cookies et des technologies similaires sur notre site web www.trading-journal.com . Cette politique détaille les types de cookies que nous utilisons, pourquoi nous les utilisons, et comment vous pouvez gérer vos préférences en matière de cookies.
                         </p>
                         <p  class="font-medium-5">
                         Qu'est-ce qu'un cookie ?

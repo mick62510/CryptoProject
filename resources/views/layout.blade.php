@@ -17,9 +17,9 @@
                                 class="ft-menu font-large-1"></i></a></li>
                     <li class="nav-item mr-auto">
                         <a class="navbar-brand" href="{{ route('home') }}">
-                            <img class="brand-logo" alt="Trading-journal logo"
+                            <img class="brand-logo" alt="Mon-Journal-Trading logo"
                                  src="{{Vite::asset('resources/images/logo.png')}}">
-                            <h3 class="brand-text">Trading-Journal</h3>
+                            <h3 class="brand-text">MonJournalTrading</h3>
                         </a>
                     </li>
                     <li class="nav-item d-none d-lg-block float-right nav-toggle">
