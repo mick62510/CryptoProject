@@ -29,7 +29,6 @@ export default {
             immediate: true,
             deep: true,
             handler: function (val,oldVal) {
-                console.log("reload data")
                if(val.actif && val.actif.length === 0){
                     this.initData(this.routeData, val);
                 }else if (val.actif && val.actif.length < 3) {
