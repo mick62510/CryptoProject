@@ -22,6 +22,11 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('home');
 Route::get('cookie-policy', [CookieController::class, 'index'])->name('cookie-policy.index');
+Route::get('/ads.txt', function () {
+    $content = view('ads');
+    return response($content, 200)
+        ->header('content-Type', 'text');
+});
 Route::middleware('auth')->group(function () {
     Route::name('crypto.')->prefix('crypto')->group(function () {
         include 'web/crypto-entries.php';
