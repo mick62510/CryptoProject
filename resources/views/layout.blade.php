@@ -48,16 +48,7 @@
     <!-- END: Main Menu-->
     <!-- BEGIN: Content-->
     <div class="app-content content">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8748011032030103"
-                crossorigin="anonymous"></script>
-        <!-- horizontal -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:500px;height:90px"
-             data-ad-client="ca-pub-8748011032030103"
-             data-ad-slot="6455391508"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        @include('layout.breadcrumb')
         <div class="content-overlay"></div>
         <div class="content-wrapper">
             <div class="content-body">
