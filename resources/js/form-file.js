@@ -3,7 +3,7 @@ import "@vueform/multiselect"
 
 $(document).ready(function () {
 
-    $('form input[type=file]').change(function () {
+    $('form input[type=file]').change(function () {console.log("eza");
         let input = $(this);
         input.parents('fieldset').find('.alert').addClass('hidden');
         let urlAjax = input.data('upload-ajax');

@@ -70,6 +70,3 @@
 
 @endsection
 
-@push('js')
-    @vite('resources/js/form-file.js')
-@endpush

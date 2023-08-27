@@ -17,7 +17,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3" aria-expanded="false">Tab 3</a>
+                            <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3" aria-expanded="false">Image de profil</a>
                         </li>
                     </ul>
                     <div class="tab-content px-1 pt-1">
@@ -46,9 +46,11 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="tab3" aria-labelledby="base-tab3">
-                            <p>Biscuit ice cream halvah candy canes bear claw ice cream cake chocolate bar donut. Toffee cotton
-                                candy liquorice. Oat cake lemon drops gingerbread dessert caramels. Sweet dessert jujubes powder sweet
-                                sesame snaps.</p>
+                            <form action="{{ route('profile.upload.image') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type="file" name="profile_image">
+                                <button type="submit">Uploader</button>
+                            </form>
                         </div>
                     </div>
                 </div>

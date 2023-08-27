@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,4 +59,23 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function uploadImage(Request $request): RedirectResponse
+    {
+        if ($request->hasFile('profile_image')) {
+            $image = $request->file('profile_image');
+            $userId = Auth::user()->getAuthIdentifier();
+            $imageName = $userId . '.' . $image->getClientOriginalExtension();
+
+            $image->move(public_path('uploads/profile_images'), $imageName);
+
+            $user = User::findOrFail($userId);
+            $user->profile_image = $imageName;
+            $user->save();
+        }
+
+        return back()->with('success', 'Image de profil mise à jour.');
+    }
+
+
 }

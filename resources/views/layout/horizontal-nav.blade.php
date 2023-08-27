@@ -5,8 +5,11 @@
                 <a class="dropdown-toggle nav-link dropdown-user-link"
                    href="#" data-toggle="dropdown">
                     <span class="avatar avatar-online">
-                        <img
-                            src="{{Vite::asset('resources/images/avatar-s-19.png')}}" alt="avatar">
+                        @if(Auth::user()->profile_image)
+                            <img src="{{ asset('uploads/profile_images/' . Auth::user()->profile_image) }}" alt="avatar">
+                        @else
+                        <img src="{{Vite::asset('resources/images/avatar-s-19.png')}}" alt="avatar">
+                        @endif
                         <i></i>
                     </span>
                     <span class="user-name">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
