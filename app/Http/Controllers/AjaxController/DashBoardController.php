@@ -54,6 +54,14 @@ class DashBoardController
         return Response::json(['options' => $data['options'], 'data' => $data['data']]);
     }
 
+    public function lineRREntries(): JsonResponse
+    {
+        $filters = $this->request->all();
+        $data = $this->cryptoEntriesService->getRRValides($filters);
+
+        return Response::json(['options' => $data['options'], 'data' => $data['data']]);
+    }
+
     public function dataActif(): JsonResponse
     {
         return Response::json($this->actifService->getAllToSelect());

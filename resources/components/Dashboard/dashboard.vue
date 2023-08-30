@@ -24,6 +24,9 @@
                         <div class="col-md-6 col-sm-12">
                             <chart-line :route-data="routeLineNumberEntries" :filters="filters" v-if="fetchDataLoaded"></chart-line>
                         </div>
+                        <div class="col-md-6 col-sm-12">
+                            <chart-line :route-data="routeLineRrValides" :filters="filters" v-if="fetchDataLoaded"></chart-line>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-12">
@@ -63,7 +66,8 @@ export default {
         routeDataActif: {type: String, required: true},
         routeCache: {type: String, required: true},
         filtersCache: {type: Object, required: false},
-        routeGetYears: {type: String, required: true}
+        routeGetYears: {type: String, required: true},
+        routeLineRrValides: {type: String, required: true},
     },
     data() {
         return {

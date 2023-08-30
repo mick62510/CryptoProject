@@ -48,8 +48,11 @@
                         <div class="tab-pane" id="tab3" aria-labelledby="base-tab3">
                             <form action="{{ route('profile.upload.image') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <input type="file" name="profile_image">
-                                <button type="submit">Uploader</button>
+                                <fieldset>
+                                    <label>Votre image de profil</label>
+                                    <input type="file" name="profile_image">
+                                </fieldset>
+                                <button type="submit" class=" btn btn-primary">Sauvegarder</button>
                             </form>
                         </div>
                     </div>

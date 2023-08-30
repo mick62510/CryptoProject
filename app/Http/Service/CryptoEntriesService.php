@@ -274,6 +274,72 @@ class CryptoEntriesService
 
         return $this->chartService->getLine($labels, $data);
     }
+    public function getRRValides(array $filters = []): array
+    {
+        $actifs = $this->getFilterActifs($filters);
+        $data = $this->repository->getRRValides(Auth::id(), actifs: $actifs, filters: $filters,activeBe: false)->all();
+        $labels = [];
+
+        $dataAll = $this->transformKeyToInt($data);
+
+        if (array_key_exists('date', $filters)) {
+            $date = $filters['date'];
+            $type = $date['type'];
+            $value = $date['value'];
+
+            if ($type === 'month') {
+                $annee = $value['year'];
+                $mois = $value['month'] + 1;
+                $premierJour = Carbon::createFromDate($annee, $mois, 1);
+                $nombreJours = $premierJour->daysInMonth;
+                $labels = [];
+
+                for ($jour = 1; $jour <= $nombreJours; $jour++) {
+                    $date = Carbon::createFromDate($annee, $mois, $jour);
+                    $labels[] = $date->dayName . " " . $date->day;
+                    if (!array_key_exists($jour, $dataAll)) {
+                        $dataAll[$jour] = 0;
+                    }
+
+                }
+            } elseif ($type === 'between') {
+                $dateDebut = Carbon::parse($value[0]);
+                $dateFin = Carbon::parse($value[1]);
+                $labels = [];
+
+                while ($dateDebut->lte($dateFin)) {
+                    if (!array_key_exists($dateDebut->format('Ymd'), $dataAll)) {
+                        $dataAll[$dateDebut->format('Ymd')] = 0;
+                    }
+
+                    $labels[] = $dateDebut->monthName . " " . $dateDebut->dayName . " " . $dateDebut->day;
+                    $dateDebut->addDay();
+                }
+
+            } elseif ($type === 'year') {
+                $labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+
+                for ($m = 1; $m <= 12; $m++) {
+                    if (!array_key_exists($m, $dataAll)) {
+                        $dataAll[$m] = 0;
+                    }
+                }
+            }
+        }
+
+        $dataAll = $this->ksortAndGetArrayValues($dataAll);
+
+        $data = [
+            [
+                'label' => 'RR Validés',
+                'data' => $dataAll,
+                'backgroundColor' => ChartService::COLOR_ALL,
+                'borderColor' => ChartService::COLOR_ALL,
+            ],
+        ];
+
+        return $this->chartService->getLine($labels, $data);
+    }
 
     private function transformKeyToInt(array $data): array
     {

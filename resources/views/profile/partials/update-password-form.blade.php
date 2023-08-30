@@ -10,10 +10,10 @@
                 @if($errors->updatePassword->has('current_password'))
                     <div class="mt-2 alert alert-danger">{{$errors->updatePassword->get('current_password')[0]}}</div>
                 @endif
-                <label for="current_password">{{__('Current Password')}}</label>
+                <label for="current_password">Mot de passe actuel</label>
                 <input type="password" class="form-control" id="current_password" name="current_password"
-                       placeholder="Current Password"
-                       data-validation-required-message="This old password field is required" aria-invalid="false">
+                       placeholder="Mot de passe actuel"
+                       data-validation-required-message="Le mot de passe est obligatoire" aria-invalid="false">
             </div>
         </div>
         <div class="form-group">
@@ -21,10 +21,10 @@
                 @if($errors->updatePassword->has('password'))
                     <div class="mt-2 alert alert-danger">{{$errors->updatePassword->get('password')[0]}}</div>
                 @endif
-                <label for="password">{{__('New Password')}}</label>
+                <label for="password">Nouveau mot de passe</label>
                 <input type="password" class="form-control" id="password" name="password"
-                       placeholder="New Password"
-                       data-validation-required-message="The new password is required" aria-invalid="false">
+                       placeholder="Nouveau mot de passe"
+                       data-validation-required-message="Le nouveau mot de passe est obligatoire" aria-invalid="false">
             </div>
         </div>
 
@@ -33,16 +33,16 @@
                 @if($errors->updatePassword->has('password_confirmation'))
                     <div class="mt-2 alert alert-danger">{{$errors->updatePassword->get('password_confirmation')}}</div>
                 @endif
-                <label for="password_confirmation">{{__('Confirm Password')}}</label>
+                <label for="password_confirmation">Confirmer le nouveau mot de passe</label>
                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
-                       placeholder="Confirm new Password"
-                       data-validation-required-message="The confirmation new password is required"
+                       placeholder="Confirmer le nouveau mot de passe"
+                       data-validation-required-message="La confirmation du nouveau mot de passe est obligatoire"
                        aria-invalid="false">
             </div>
         </div>
 
         <div class="flex items-center gap-4">
-            <button type="submit" class="btn btn-primary mt-2">{{ __('Save') }}</button>
+            <button type="submit" class="btn btn-primary mt-2">Sauvegarder</button>
         </div>
     </form>
 

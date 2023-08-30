@@ -182,6 +182,39 @@ class CryptoEntriesRepository extends AbstractBaseRepository
         }
 
         return $qb->pluck('count_total', 'month');
+    }
+    public function getRRValides(?int $userId = null, ?string $result = null, array $actifs = [], array $filters = [],$activeBe = true): Collection
+    {
+        $qb = CryptoEntries::query()->orderBy('id');
+
+        if ($actifs) {
+            $qb->whereIn('actif_code', $actifs);
+        }
+
+        if ($result) {
+            $qb->where('result', '=', $result);
+
+        } else {
+            $qb->whereNotNull('result');
+        }
+
+        if ($userId) {
+            $qb->where('user_id', '=', $userId);
+        }
+
+        $qb->select(DB::raw("id"),DB::raw("risk_reward_valid"), DB::raw("created_at as date"));
+        if (array_key_exists('date', $filters)) {
+            $type = $filters['date']['type'];
+            if ($type === 'year') {
+                $qb->select(DB::raw("SUM(risk_reward_valid) as count_total"), DB::raw("(DATE_FORMAT(created_at, '%m')) as month"))->groupBy(DB::raw("DATE_FORMAT(created_at, '%m-%Y')"));
+            } else if ($type === 'month') {
+                $qb->select(DB::raw("SUM(risk_reward_valid) as count_total"), DB::raw("(DATE_FORMAT(created_at, '%d')) as month"))->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"));
+            } else if ($type === 'between') {
+                $qb->select(DB::raw("SUM(risk_reward_valid) as count_total"), DB::raw("(DATE_FORMAT(created_at, '%Y%m%d')) as month"))->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"));
+            }
+        }
+
+        return $qb->pluck('count_total', 'month');
 
     }
 }
